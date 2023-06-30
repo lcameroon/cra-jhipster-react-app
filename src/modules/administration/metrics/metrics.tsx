@@ -19,9 +19,9 @@ import { useAppDispatch, useAppSelector } from '../../../config/store';
 
 export const MetricsPage = () => {
   const dispatch = useAppDispatch();
-  const metrics = useAppSelector(state => state.administration.metrics);
-  const isFetching = useAppSelector(state => state.administration.loading);
-  const threadDump = useAppSelector(state => state.administration.threadDump);
+  const metrics = useAppSelector((state) => state.administration.metrics);
+  const isFetching = useAppSelector((state) => state.administration.loading);
+  const threadDump = useAppSelector((state) => state.administration.threadDump);
 
   useEffect(() => {
     dispatch(getSystemMetrics());

@@ -3,7 +3,7 @@ import { Route, RouteProps } from 'react-router-dom';
 import ErrorBoundary from './error-boundary';
 
 export const ErrorBoundaryRoute = ({ component: Component, ...rest }: RouteProps | any) => {
-  const encloseInErrorBoundary = props => (
+  const encloseInErrorBoundary = (props) => (
     <ErrorBoundary>
       <Component {...props} />
     </ErrorBoundary>

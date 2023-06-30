@@ -13,7 +13,12 @@ const initialState = {
 
 export type RegisterState = Readonly<typeof initialState>;
 
-interface RegisterData { login: string; email: string; password: string; langKey?: string }
+interface RegisterData {
+  login: string;
+  email: string;
+  password: string;
+  langKey?: string;
+}
 
 // Actions
 export const handleRegister: any = createAsyncThunk(
@@ -32,7 +37,7 @@ export const RegisterSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(handleRegister.pending, state => {
+      .addCase(handleRegister.pending, (state) => {
         state.loading = true;
       })
       .addCase(handleRegister.rejected, (state, action) => ({

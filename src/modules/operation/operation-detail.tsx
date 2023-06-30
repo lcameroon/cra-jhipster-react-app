@@ -16,7 +16,7 @@ export const OperationDetail = (props: RouteComponentProps<{ id: string }>) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const operationEntity = useAppSelector(state => state.operation.entity);
+  const operationEntity = useAppSelector((state) => state.operation.entity);
   return (
     <Row>
       <Col md="8">

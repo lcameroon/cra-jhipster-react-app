@@ -84,7 +84,7 @@ export const LabelSlice = createEntitySlice({
         state.loading = false;
         state.entity = action.payload.data;
       })
-      .addCase(deleteEntity.fulfilled, state => {
+      .addCase(deleteEntity.fulfilled, (state) => {
         state.updating = false;
         state.updateSuccess = true;
         state.entity = {};
@@ -102,12 +102,12 @@ export const LabelSlice = createEntitySlice({
         state.updateSuccess = true;
         state.entity = action.payload.data;
       })
-      .addMatcher(isPending(getEntities, getEntity), state => {
+      .addMatcher(isPending(getEntities, getEntity), (state) => {
         state.errorMessage = null;
         state.updateSuccess = false;
         state.loading = true;
       })
-      .addMatcher(isPending(createEntity, updateEntity, partialUpdateEntity, deleteEntity), state => {
+      .addMatcher(isPending(createEntity, updateEntity, partialUpdateEntity, deleteEntity), (state) => {
         state.errorMessage = null;
         state.updateSuccess = false;
         state.updating = true;

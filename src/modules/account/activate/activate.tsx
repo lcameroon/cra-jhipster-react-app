@@ -37,7 +37,7 @@ export const ActivatePage = (props: RouteComponentProps<{ key: any }>) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { activationSuccess, activationFailure } = useAppSelector(state => state.activate);
+  const { activationSuccess, activationFailure } = useAppSelector((state) => state.activate);
 
   return (
     <div>

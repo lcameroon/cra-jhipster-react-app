@@ -15,14 +15,14 @@ export const UserManagementDeleteDialog = (props: RouteComponentProps<{ login: s
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleClose = event => {
+  const handleClose = (event) => {
     event.stopPropagation();
     props.history.push('/admin/user-management');
   };
 
-  const user = useAppSelector(state => state.userManagement.user);
+  const user = useAppSelector((state) => state.userManagement.user);
 
-  const confirmDelete = event => {
+  const confirmDelete = (event) => {
     dispatch(deleteUser(`${user.login}`));
     handleClose(event);
   };

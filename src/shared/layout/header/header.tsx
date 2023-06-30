@@ -24,7 +24,7 @@ const Header = (props: IHeaderProps) => {
 
   const dispatch = useAppDispatch();
 
-  const handleLocaleChange = event => {
+  const handleLocaleChange = (event) => {
     const langKey = event.target.value;
     Storage.session.set('locale', langKey);
     dispatch(setLocale(langKey));

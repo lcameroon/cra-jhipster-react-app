@@ -52,7 +52,7 @@ export const setLoggers = createAsyncThunk(
   }
 );
 
-export const changeLogLevel: (name, configuredLevel) => AppThunk = (name, configuredLevel) => async dispatch => {
+export const changeLogLevel: (name, configuredLevel) => AppThunk = (name, configuredLevel) => async (dispatch) => {
   await dispatch(setLoggers({ name, configuredLevel }));
   dispatch(getLoggers());
 };
@@ -107,7 +107,7 @@ export const AdministrationSlice = createSlice({
           env: action.payload.data,
         };
       })
-      .addMatcher(isPending(getSystemHealth, getSystemMetrics, getSystemThreadDump, getLoggers, getConfigurations, getEnv), state => {
+      .addMatcher(isPending(getSystemHealth, getSystemMetrics, getSystemThreadDump, getLoggers, getConfigurations, getEnv), (state) => {
         state.errorMessage = null;
         state.loading = true;
       })

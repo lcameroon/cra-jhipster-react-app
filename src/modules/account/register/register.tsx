@@ -19,15 +19,15 @@ export const RegisterPage = () => {
     []
   );
 
-  const currentLocale = useAppSelector(state => state.locale.currentLocale);
+  const currentLocale = useAppSelector((state) => state.locale.currentLocale);
 
   const handleValidSubmit: any = ({ username, email, firstPassword }) => {
     dispatch(handleRegister({ login: username, email, password: firstPassword, langKey: currentLocale }));
   };
 
-  const updatePassword = event => setPassword(event.target.value);
+  const updatePassword = (event) => setPassword(event.target.value);
 
-  const successMessage = useAppSelector(state => state.register.successMessage);
+  const successMessage = useAppSelector((state) => state.register.successMessage);
 
   useEffect(() => {
     if (successMessage) {
@@ -71,7 +71,7 @@ export const RegisterPage = () => {
                 required: { value: true, message: translate('global.messages.validate.email.required') },
                 minLength: { value: 5, message: translate('global.messages.validate.email.minlength') },
                 maxLength: { value: 254, message: translate('global.messages.validate.email.maxlength') },
-                validate: v => isEmail(v) || translate('global.messages.validate.email.invalid'),
+                validate: (v) => isEmail(v) || translate('global.messages.validate.email.invalid'),
               }}
               data-cy="email"
             />
@@ -98,7 +98,7 @@ export const RegisterPage = () => {
                 required: { value: true, message: translate('global.messages.validate.confirmpassword.required') },
                 minLength: { value: 4, message: translate('global.messages.validate.confirmpassword.minlength') },
                 maxLength: { value: 50, message: translate('global.messages.validate.confirmpassword.maxlength') },
-                validate: v => v === password || translate('global.messages.error.dontmatch'),
+                validate: (v) => v === password || translate('global.messages.error.dontmatch'),
               }}
               data-cy="secondPassword"
             />

@@ -7,9 +7,9 @@ import LoginModal from './login-modal';
 
 export const Login = (props: RouteComponentProps<any>) => {
   const dispatch = useAppDispatch();
-  const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
-  const loginError = useAppSelector(state => state.authentication.loginError);
-  const showModalLogin = useAppSelector(state => state.authentication.showModalLogin);
+  const isAuthenticated = useAppSelector((state) => state.authentication.isAuthenticated);
+  const loginError = useAppSelector((state) => state.authentication.loginError);
+  const showModalLogin = useAppSelector((state) => state.authentication.showModalLogin);
   const [showModal, setShowModal] = useState(showModalLogin);
 
   useEffect(() => {

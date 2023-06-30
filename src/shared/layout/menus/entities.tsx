@@ -4,7 +4,7 @@ import { Translate, translate } from 'react-jhipster';
 import MenuItem from './menu-item';
 import { NavDropdown } from './menu-components';
 
-export const EntitiesMenu = props => (
+export const EntitiesMenu = (props) => (
   <NavDropdown
     icon="th-list"
     name={translate('global.menu.entities.main')}

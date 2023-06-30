@@ -17,11 +17,11 @@ export const BankAccountUpdate = (props: RouteComponentProps<{ id: string }>) =>
 
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
-  const users = useAppSelector(state => state.userManagement.users);
-  const bankAccountEntity = useAppSelector(state => state.bankAccount.entity);
-  const loading = useAppSelector(state => state.bankAccount.loading);
-  const updating = useAppSelector(state => state.bankAccount.updating);
-  const updateSuccess = useAppSelector(state => state.bankAccount.updateSuccess);
+  const users = useAppSelector((state) => state.userManagement.users);
+  const bankAccountEntity = useAppSelector((state) => state.bankAccount.entity);
+  const loading = useAppSelector((state) => state.bankAccount.loading);
+  const updating = useAppSelector((state) => state.bankAccount.updating);
+  const updateSuccess = useAppSelector((state) => state.bankAccount.updateSuccess);
 
   const handleClose = () => {
     props.history.push('/bank-account');
@@ -45,11 +45,11 @@ export const BankAccountUpdate = (props: RouteComponentProps<{ id: string }>) =>
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updateSuccess]);
 
-  const saveEntity = values => {
+  const saveEntity = (values) => {
     const entity = {
       ...bankAccountEntity,
       ...values,
-      user: users.find(it => it.id.toString() === values.userId.toString()),
+      user: users.find((it) => it.id.toString() === values.userId.toString()),
     };
 
     if (isNew) {
@@ -112,7 +112,7 @@ export const BankAccountUpdate = (props: RouteComponentProps<{ id: string }>) =>
                 type="text"
                 validate={{
                   required: { value: true, message: translate('entity.validation.required') },
-                  validate: v => isNumber(v) || translate('entity.validation.number'),
+                  validate: (v) => isNumber(v) || translate('entity.validation.number'),
                 }}
               />
               <ValidatedField
@@ -124,7 +124,7 @@ export const BankAccountUpdate = (props: RouteComponentProps<{ id: string }>) =>
               >
                 <option value="" key="0" />
                 {users
-                  ? users.map(otherEntity => (
+                  ? users.map((otherEntity) => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.login}
                       </option>

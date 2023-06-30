@@ -10,8 +10,8 @@ import { useAppDispatch, useAppSelector } from '../../config/store';
 export const Label = (props: RouteComponentProps<{ url: string }>) => {
   const dispatch = useAppDispatch();
 
-  const labelList = useAppSelector(state => state.label.entities);
-  const loading = useAppSelector(state => state.label.loading);
+  const labelList = useAppSelector((state) => state.label.entities);
+  const loading = useAppSelector((state) => state.label.loading);
 
   useEffect(() => {
     dispatch(getEntities({}));

@@ -7,7 +7,7 @@ const addErrorAlert = (message, key?, data?) => {
   toast.error(translate(key, data));
 };
 
-const notificationMiddleware  = () => next => action => {
+const notificationMiddleware = () => (next) => (action) => {
   const { error, payload } = action;
 
   /**

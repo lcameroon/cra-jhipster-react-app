@@ -12,8 +12,8 @@ export const HealthPage = () => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useAppDispatch();
 
-  const health = useAppSelector(state => state.administration.health);
-  const isFetching = useAppSelector(state => state.administration.loading);
+  const health = useAppSelector((state) => state.administration.health);
+  const isFetching = useAppSelector((state) => state.administration.loading);
 
   useEffect(() => {
     dispatch(getSystemHealth());

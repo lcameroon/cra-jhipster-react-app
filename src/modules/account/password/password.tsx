@@ -25,11 +25,11 @@ export const PasswordPage = () => {
     dispatch(savePassword({ currentPassword, newPassword }));
   };
 
-  const updatePassword = event => setPassword(event.target.value);
+  const updatePassword = (event) => setPassword(event.target.value);
 
-  const account = useAppSelector(state => state.authentication.account);
-  const successMessage = useAppSelector(state => state.password.successMessage);
-  const errorMessage = useAppSelector(state => state.password.errorMessage);
+  const account = useAppSelector((state) => state.authentication.account);
+  const successMessage = useAppSelector((state) => state.password.successMessage);
+  const errorMessage = useAppSelector((state) => state.password.errorMessage);
 
   useEffect(() => {
     if (successMessage) {
@@ -82,7 +82,7 @@ export const PasswordPage = () => {
                 required: { value: true, message: translate('global.messages.validate.confirmpassword.required') },
                 minLength: { value: 4, message: translate('global.messages.validate.confirmpassword.minlength') },
                 maxLength: { value: 50, message: translate('global.messages.validate.confirmpassword.maxlength') },
-                validate: v => v === password || translate('global.messages.error.dontmatch'),
+                validate: (v) => v === password || translate('global.messages.error.dontmatch'),
               }}
               data-cy="confirmPassword"
             />

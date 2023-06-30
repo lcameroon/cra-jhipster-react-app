@@ -50,7 +50,7 @@ export const PasswordResetSlice = createSlice({
         resetPasswordSuccess: true,
         successMessage: 'reset.finish.messages.success',
       }))
-      .addMatcher(isPending(handlePasswordResetInit, handlePasswordResetFinish), state => {
+      .addMatcher(isPending(handlePasswordResetInit, handlePasswordResetFinish), (state) => {
         state.loading = true;
       })
       .addMatcher(isRejected(handlePasswordResetInit, handlePasswordResetFinish), () => ({

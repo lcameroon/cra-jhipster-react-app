@@ -56,7 +56,7 @@ export const authenticate = createAsyncThunk(
 
 export const login: (username: string, password: string, rememberMe?: boolean) => AppThunk =
   (username, password, rememberMe = false) =>
-  async dispatch => {
+  async (dispatch) => {
     const result = await dispatch(authenticate({ username, password, rememberMe }));
     const response = result.payload as AxiosResponse;
     const bearerToken = response?.headers?.authorization;
@@ -80,12 +80,12 @@ export const clearAuthToken = () => {
   }
 };
 
-export const logout: () => AppThunk = () => dispatch => {
+export const logout: () => AppThunk = () => (dispatch) => {
   clearAuthToken();
   dispatch(logoutSession());
 };
 
-export const clearAuthentication = messageKey => dispatch => {
+export const clearAuthentication = (messageKey) => (dispatch) => {
   clearAuthToken();
   dispatch(authError(messageKey));
   dispatch(clearAuth());
@@ -125,7 +125,7 @@ export const AuthenticationSlice = createSlice({
         showModalLogin: true,
         loginError: true,
       }))
-      .addCase(authenticate.fulfilled, state => ({
+      .addCase(authenticate.fulfilled, (state) => ({
         ...state,
         loading: false,
         loginError: false,
@@ -150,10 +150,10 @@ export const AuthenticationSlice = createSlice({
           account: action.payload.data,
         };
       })
-      .addCase(authenticate.pending, state => {
+      .addCase(authenticate.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getAccount.pending, state => {
+      .addCase(getAccount.pending, (state) => {
         state.loading = true;
       });
   },

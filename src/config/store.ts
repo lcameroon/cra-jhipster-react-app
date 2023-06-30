@@ -9,7 +9,7 @@ import { loadingBarMiddleware } from 'react-redux-loading-bar';
 
 const store = configureStore({
   reducer,
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         // Ignore these field paths in all actions

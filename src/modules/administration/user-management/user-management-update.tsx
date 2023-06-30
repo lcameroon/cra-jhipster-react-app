@@ -28,7 +28,7 @@ export const UserManagementUpdate = (props: RouteComponentProps<{ login: string 
     props.history.push('/admin/user-management');
   };
 
-  const saveUser = values => {
+  const saveUser = (values) => {
     if (isNew) {
       dispatch(createUser(values));
     } else {
@@ -38,10 +38,10 @@ export const UserManagementUpdate = (props: RouteComponentProps<{ login: string 
   };
 
   const isInvalid = false;
-  const user = useAppSelector(state => state.userManagement.user);
-  const loading = useAppSelector(state => state.userManagement.loading);
-  const updating = useAppSelector(state => state.userManagement.updating);
-  const authorities = useAppSelector(state => state.userManagement.authorities);
+  const user = useAppSelector((state) => state.userManagement.user);
+  const loading = useAppSelector((state) => state.userManagement.loading);
+  const updating = useAppSelector((state) => state.userManagement.updating);
+  const authorities = useAppSelector((state) => state.userManagement.authorities);
 
   return (
     <div>
@@ -132,7 +132,7 @@ export const UserManagementUpdate = (props: RouteComponentProps<{ login: string 
                     value: 254,
                     message: translate('global.messages.validate.email.maxlength'),
                   },
-                  validate: v => isEmail(v) || translate('global.messages.validate.email.invalid'),
+                  validate: (v) => isEmail(v) || translate('global.messages.validate.email.invalid'),
                 }}
               />
               <ValidatedField
@@ -144,14 +144,14 @@ export const UserManagementUpdate = (props: RouteComponentProps<{ login: string 
                 label={translate('userManagement.activated')}
               />
               <ValidatedField type="select" name="langKey" label={translate('userManagement.langKey')}>
-                {locales.map(locale => (
+                {locales.map((locale) => (
                   <option value={locale} key={locale}>
                     {languages[locale].name}
                   </option>
                 ))}
               </ValidatedField>
               <ValidatedField type="select" name="authorities" multiple label={translate('userManagement.profiles')}>
-                {authorities.map(role => (
+                {authorities.map((role) => (
                   <option value={role} key={role}>
                     {role}
                   </option>

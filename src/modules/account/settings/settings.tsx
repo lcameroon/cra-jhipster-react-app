@@ -10,8 +10,8 @@ import { saveAccountSettings, reset } from './settings.reducer';
 
 export const SettingsPage = () => {
   const dispatch = useAppDispatch();
-  const account = useAppSelector(state => state.authentication.account);
-  const successMessage = useAppSelector(state => state.settings.successMessage);
+  const account = useAppSelector((state) => state.authentication.account);
+  const successMessage = useAppSelector((state) => state.settings.successMessage);
 
   useEffect(() => {
     dispatch(getSession());
@@ -27,7 +27,7 @@ export const SettingsPage = () => {
     }
   }, [successMessage]);
 
-  const handleValidSubmit = values => {
+  const handleValidSubmit = (values) => {
     dispatch(
       saveAccountSettings({
         ...account,
@@ -79,12 +79,12 @@ export const SettingsPage = () => {
                 required: { value: true, message: translate('global.messages.validate.email.required') },
                 minLength: { value: 5, message: translate('global.messages.validate.email.minlength') },
                 maxLength: { value: 254, message: translate('global.messages.validate.email.maxlength') },
-                validate: v => isEmail(v) || translate('global.messages.validate.email.invalid'),
+                validate: (v) => isEmail(v) || translate('global.messages.validate.email.invalid'),
               }}
               data-cy="email"
             />
             <ValidatedField type="select" id="langKey" name="langKey" label={translate('settings.form.language')} data-cy="langKey">
-              {locales.map(locale => (
+              {locales.map((locale) => (
                 <option value={locale} key={locale}>
                   {languages[locale].name}
                 </option>

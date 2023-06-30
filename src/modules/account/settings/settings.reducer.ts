@@ -19,7 +19,7 @@ export type SettingsState = Readonly<typeof initialState>;
 // Actions
 const apiUrl = 'api/account';
 
-export const saveAccountSettings: (account: any) => AppThunk = account => async dispatch => {
+export const saveAccountSettings: (account: any) => AppThunk = (account) => async (dispatch) => {
   await dispatch(updateAccount(account));
 
   if (Storage.session.get(`locale`)) {
@@ -43,7 +43,7 @@ export const SettingsSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(updateAccount.pending, state => {
+      .addCase(updateAccount.pending, (state) => {
         state.loading = true;
         state.errorMessage = null;
         state.updateSuccess = false;
@@ -53,7 +53,7 @@ export const SettingsSlice = createSlice({
         state.updateSuccess = false;
         state.updateFailure = true;
       })
-      .addCase(updateAccount.fulfilled, state => {
+      .addCase(updateAccount.fulfilled, (state) => {
         state.loading = false;
         state.updateSuccess = true;
         state.updateFailure = false;

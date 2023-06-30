@@ -1,10 +1,10 @@
 const config = {
-  VERSION: process.env.VERSION,
+  VERSION: import.meta.env.VERSION,
 };
 
 export default config;
 
-export const SERVER_API_URL = process.env.SERVER_API_URL;
+export const SERVER_API_URL = import.meta.env.SERVER_API_URL;
 
 export const AUTHORITIES = {
   ADMIN: 'ROLE_ADMIN',

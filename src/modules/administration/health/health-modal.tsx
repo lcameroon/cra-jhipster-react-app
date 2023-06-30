@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 
-const formatDiskSpaceOutput = rawValue => {
+const formatDiskSpaceOutput = (rawValue) => {
   // Should display storage space in an human readable unit
   const val = rawValue / 1073741824;
   if (val > 1) {

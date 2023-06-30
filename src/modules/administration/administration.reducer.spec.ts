@@ -35,7 +35,7 @@ describe('Administration reducer tests', () => {
   }
 
   function testMultipleTypes(types, payload, testFunction, error?) {
-    types.forEach(e => {
+    types.forEach((e) => {
       testFunction(administration(undefined, { type: e, payload, error }));
     });
   }
@@ -58,7 +58,7 @@ describe('Administration reducer tests', () => {
           getEnv.pending.type,
         ],
         {},
-        state => {
+        (state) => {
           expect(state).toMatchObject({
             errorMessage: null,
             loading: true,
@@ -80,7 +80,7 @@ describe('Administration reducer tests', () => {
           getEnv.rejected.type,
         ],
         'something happened',
-        state => {
+        (state) => {
           expect(state).toMatchObject({
             loading: false,
             errorMessage: 'error',

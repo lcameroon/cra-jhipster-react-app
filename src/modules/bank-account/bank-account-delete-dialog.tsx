@@ -15,8 +15,8 @@ export const BankAccountDeleteDialog = (props: RouteComponentProps<{ id: string 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const bankAccountEntity = useAppSelector(state => state.bankAccount.entity);
-  const updateSuccess = useAppSelector(state => state.bankAccount.updateSuccess);
+  const bankAccountEntity = useAppSelector((state) => state.bankAccount.entity);
+  const updateSuccess = useAppSelector((state) => state.bankAccount.updateSuccess);
 
   const handleClose = () => {
     props.history.push('/bank-account');

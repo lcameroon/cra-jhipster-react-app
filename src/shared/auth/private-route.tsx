@@ -10,12 +10,12 @@ interface IOwnProps extends RouteProps {
 }
 
 export const PrivateRouteComponent = ({ component: Component, hasAnyAuthorities = [], ...rest }: IOwnProps | any) => {
-  const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
-  const sessionHasBeenFetched = useAppSelector(state => state.authentication.sessionHasBeenFetched);
-  const account = useAppSelector(state => state.authentication.account);
+  const isAuthenticated = useAppSelector((state) => state.authentication.isAuthenticated);
+  const sessionHasBeenFetched = useAppSelector((state) => state.authentication.sessionHasBeenFetched);
+  const account = useAppSelector((state) => state.authentication.account);
   const isAuthorized = hasAnyAuthority(account.authorities, hasAnyAuthorities);
 
-  const checkAuthorities = props =>
+  const checkAuthorities = (props) =>
     isAuthorized ? (
       <ErrorBoundary>
         <Component {...props} />
@@ -28,7 +28,7 @@ export const PrivateRouteComponent = ({ component: Component, hasAnyAuthorities 
       </div>
     );
 
-  const renderRedirect = props => {
+  const renderRedirect = (props) => {
     if (!sessionHasBeenFetched) {
       return <div></div>;
     } else {
@@ -56,7 +56,7 @@ export const hasAnyAuthority = (authorities: string[], hasAnyAuthorities: string
     if (hasAnyAuthorities.length === 0) {
       return true;
     }
-    return hasAnyAuthorities.some(auth => authorities.includes(auth));
+    return hasAnyAuthorities.some((auth) => authorities.includes(auth));
   }
   return false;
 };

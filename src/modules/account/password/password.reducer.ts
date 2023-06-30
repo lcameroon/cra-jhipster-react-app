@@ -38,18 +38,18 @@ export const PasswordSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(savePassword.pending, state => {
+      .addCase(savePassword.pending, (state) => {
         state.errorMessage = null;
         state.updateSuccess = false;
         state.loading = true;
       })
-      .addCase(savePassword.rejected, state => {
+      .addCase(savePassword.rejected, (state) => {
         state.loading = false;
         state.updateSuccess = false;
         state.updateFailure = true;
         state.errorMessage = 'password.messages.error';
       })
-      .addCase(savePassword.fulfilled, state => {
+      .addCase(savePassword.fulfilled, (state) => {
         state.loading = false;
         state.updateSuccess = true;
         state.updateFailure = false;

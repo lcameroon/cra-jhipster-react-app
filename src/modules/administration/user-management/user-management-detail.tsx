@@ -17,7 +17,7 @@ export const UserManagementDetail = (props: RouteComponentProps<{ login: string 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const user = useAppSelector(state => state.userManagement.user);
+  const user = useAppSelector((state) => state.userManagement.user);
 
   return (
     <div>

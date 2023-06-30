@@ -21,8 +21,7 @@ loadIcons();
 
 const rootEl = document.getElementById('root');
 
-const render = Component =>
-// eslint-disable-next-line react/no-render-return-value
+const render = (Component: React.FC) =>
   ReactDOM.render(
     <ErrorBoundary>
       <Provider store={store}>

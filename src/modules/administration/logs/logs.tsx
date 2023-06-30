@@ -6,8 +6,8 @@ import { useAppDispatch, useAppSelector } from '../../../config/store';
 
 export const LogsPage = () => {
   const [filter, setFilter] = useState('');
-  const logs = useAppSelector(state => state.administration.logs);
-  const isFetching = useAppSelector(state => state.administration.loading);
+  const logs = useAppSelector((state) => state.administration.logs);
+  const isFetching = useAppSelector((state) => state.administration.loading);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -17,11 +17,11 @@ export const LogsPage = () => {
 
   const changeLevel = (loggerName, level) => () => dispatch(changeLogLevel(loggerName, level));
 
-  const changeFilter = evt => setFilter(evt.target.value);
+  const changeFilter = (evt) => setFilter(evt.target.value);
 
   const getClassName = (level, check, className) => (level === check ? `btn btn-sm btn-${className}` : 'btn btn-sm btn-light');
 
-  const filterFn = l => l.name.toUpperCase().includes(filter.toUpperCase());
+  const filterFn = (l) => l.name.toUpperCase().includes(filter.toUpperCase());
 
   const loggers = logs ? Object.entries(logs.loggers).map((e: any[]) => ({ name: e[0], level: e[1].effectiveLevel })) : [];
 

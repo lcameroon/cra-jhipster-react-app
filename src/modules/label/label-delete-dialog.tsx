@@ -15,8 +15,8 @@ export const LabelDeleteDialog = (props: RouteComponentProps<{ id: string }>) =>
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const labelEntity = useAppSelector(state => state.label.entity);
-  const updateSuccess = useAppSelector(state => state.label.updateSuccess);
+  const labelEntity = useAppSelector((state) => state.label.entity);
+  const updateSuccess = useAppSelector((state) => state.label.updateSuccess);
 
   const handleClose = () => {
     props.history.push('/label');

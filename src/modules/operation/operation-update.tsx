@@ -16,12 +16,12 @@ export const OperationUpdate = (props: RouteComponentProps<{ id: string }>) => {
 
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
-  const bankAccounts = useAppSelector(state => state.bankAccount.entities);
-  const labels = useAppSelector(state => state.label.entities);
-  const operationEntity = useAppSelector(state => state.operation.entity);
-  const loading = useAppSelector(state => state.operation.loading);
-  const updating = useAppSelector(state => state.operation.updating);
-  const updateSuccess = useAppSelector(state => state.operation.updateSuccess);
+  const bankAccounts = useAppSelector((state) => state.bankAccount.entities);
+  const labels = useAppSelector((state) => state.label.entities);
+  const operationEntity = useAppSelector((state) => state.operation.entity);
+  const loading = useAppSelector((state) => state.operation.loading);
+  const updating = useAppSelector((state) => state.operation.updating);
+  const updateSuccess = useAppSelector((state) => state.operation.updateSuccess);
 
   const handleClose = () => {
     props.history.push('/operation');
@@ -44,7 +44,7 @@ export const OperationUpdate = (props: RouteComponentProps<{ id: string }>) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updateSuccess]);
 
-  const saveEntity = values => {
+  const saveEntity = (values) => {
     values.date = convertDateTimeToServer(values.date);
 
     const entity = {
@@ -126,7 +126,7 @@ export const OperationUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 type="text"
                 validate={{
                   required: { value: true, message: translate('entity.validation.required') },
-                  validate: v => isNumber(v) || translate('entity.validation.number'),
+                  validate: (v) => isNumber(v) || translate('entity.validation.number'),
                 }}
               />
               <ValidatedField
@@ -138,7 +138,7 @@ export const OperationUpdate = (props: RouteComponentProps<{ id: string }>) => {
               >
                 <option value="" key="0" />
                 {bankAccounts
-                  ? bankAccounts.map(otherEntity => (
+                  ? bankAccounts.map((otherEntity) => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.name}
                       </option>
@@ -155,7 +155,7 @@ export const OperationUpdate = (props: RouteComponentProps<{ id: string }>) => {
               >
                 <option value="" key="0" />
                 {labels
-                  ? labels.map(otherEntity => (
+                  ? labels.map((otherEntity) => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.label}
                       </option>

@@ -16,7 +16,7 @@ export const BankAccountDetail = (props: RouteComponentProps<{ id: string }>) =>
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const bankAccountEntity = useAppSelector(state => state.bankAccount.entity);
+  const bankAccountEntity = useAppSelector((state) => state.bankAccount.entity);
   return (
     <Row>
       <Col md="8">

@@ -93,7 +93,7 @@ export const UserManagementSlice = createSlice({
         state.loading = false;
         state.user = action.payload.data;
       })
-      .addCase(deleteUser.fulfilled, state => {
+      .addCase(deleteUser.fulfilled, (state) => {
         state.updating = false;
         state.updateSuccess = true;
         state.user = defaultValue;
@@ -109,12 +109,12 @@ export const UserManagementSlice = createSlice({
         state.updateSuccess = true;
         state.user = action.payload.data;
       })
-      .addMatcher(isPending(getUsers, getUsersAsAdmin, getUser), state => {
+      .addMatcher(isPending(getUsers, getUsersAsAdmin, getUser), (state) => {
         state.errorMessage = null;
         state.updateSuccess = false;
         state.loading = true;
       })
-      .addMatcher(isPending(createUser, updateUser, deleteUser), state => {
+      .addMatcher(isPending(createUser, updateUser, deleteUser), (state) => {
         state.errorMessage = null;
         state.updateSuccess = false;
         state.updating = true;

@@ -15,8 +15,8 @@ export const OperationDeleteDialog = (props: RouteComponentProps<{ id: string }>
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const operationEntity = useAppSelector(state => state.operation.entity);
-  const updateSuccess = useAppSelector(state => state.operation.updateSuccess);
+  const operationEntity = useAppSelector((state) => state.operation.entity);
+  const updateSuccess = useAppSelector((state) => state.operation.updateSuccess);
 
   const handleClose = () => {
     props.history.push('/operation');

@@ -27,10 +27,10 @@ export const ActivateSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(activateAction.pending, () => initialState)
-      .addCase(activateAction.rejected, state => {
+      .addCase(activateAction.rejected, (state) => {
         state.activationFailure = true;
       })
-      .addCase(activateAction.fulfilled, state => {
+      .addCase(activateAction.fulfilled, (state) => {
         state.activationSuccess = true;
       });
   },

@@ -8,7 +8,7 @@ import { Row, Col, Alert } from 'reactstrap';
 import { useAppSelector } from '../../config/store';
 
 export const Home: React.FC = () => {
-  const account = useAppSelector(state => state.authentication.account);
+  const account = useAppSelector((state) => state.authentication.account);
 
   return (
     <Row>

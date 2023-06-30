@@ -25,7 +25,7 @@ export const PasswordResetFinishPage = (props: RouteComponentProps<{ key: string
     dispatch(handlePasswordResetFinish({ key, newPassword }));
   };
 
-  const updatePassword = event => setPassword(event.target.value);
+  const updatePassword = (event) => setPassword(event.target.value);
 
   const getResetForm = () => {
     return (
@@ -53,7 +53,7 @@ export const PasswordResetFinishPage = (props: RouteComponentProps<{ key: string
             required: { value: true, message: translate('global.messages.validate.confirmpassword.required') },
             minLength: { value: 4, message: translate('global.messages.validate.confirmpassword.minlength') },
             maxLength: { value: 50, message: translate('global.messages.validate.confirmpassword.maxlength') },
-            validate: v => v === password || translate('global.messages.error.dontmatch'),
+            validate: (v) => v === password || translate('global.messages.error.dontmatch'),
           }}
           data-cy="confirmResetPassword"
         />
@@ -64,7 +64,7 @@ export const PasswordResetFinishPage = (props: RouteComponentProps<{ key: string
     );
   };
 
-  const successMessage = useAppSelector(state => state.passwordReset.successMessage);
+  const successMessage = useAppSelector((state) => state.passwordReset.successMessage);
 
   useEffect(() => {
     if (successMessage) {

@@ -21,7 +21,7 @@ export const PasswordResetInit = () => {
     dispatch(handlePasswordResetInit(email));
   };
 
-  const successMessage = useAppSelector(state => state.passwordReset.successMessage);
+  const successMessage = useAppSelector((state) => state.passwordReset.successMessage);
 
   useEffect(() => {
     if (successMessage) {
@@ -51,7 +51,7 @@ export const PasswordResetInit = () => {
                 required: { value: true, message: translate('global.messages.validate.email.required') },
                 minLength: { value: 5, message: translate('global.messages.validate.email.minlength') },
                 maxLength: { value: 254, message: translate('global.messages.validate.email.maxlength') },
-                validate: v => isEmail(v) || translate('global.messages.validate.email.invalid'),
+                validate: (v) => isEmail(v) || translate('global.messages.validate.email.invalid'),
               }}
               data-cy="emailResetPassword"
             />

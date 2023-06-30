@@ -18,7 +18,7 @@ import { defaultValue } from '../../../shared/model/user.model';
 import { AUTHORITIES } from '../../../config/constants';
 
 describe('User management reducer tests', () => {
-  const username = process.env.E2E_USERNAME ?? 'admin';
+  const username = import.meta.env.E2E_USERNAME ?? 'admin';
 
   function isEmpty(element): boolean {
     if (element instanceof Array) {
@@ -42,7 +42,7 @@ describe('User management reducer tests', () => {
   }
 
   function testMultipleTypes(types, payload, testFunction, error?) {
-    types.forEach(e => {
+    types.forEach((e) => {
       testFunction(userManagement(undefined, { type: e, payload, error }));
     });
   }
@@ -59,7 +59,7 @@ describe('User management reducer tests', () => {
     });
 
     it('should set state to loading', () => {
-      testMultipleTypes([getUsers.pending.type, getUsersAsAdmin.pending.type, getUser.pending.type], {}, state => {
+      testMultipleTypes([getUsers.pending.type, getUsersAsAdmin.pending.type, getUser.pending.type], {}, (state) => {
         expect(state).toMatchObject({
           errorMessage: null,
           updateSuccess: false,
@@ -69,7 +69,7 @@ describe('User management reducer tests', () => {
     });
 
     it('should set state to updating', () => {
-      testMultipleTypes([createUser.pending.type, updateUser.pending.type, deleteUser.pending.type], {}, state => {
+      testMultipleTypes([createUser.pending.type, updateUser.pending.type, deleteUser.pending.type], {}, (state) => {
         expect(state).toMatchObject({
           errorMessage: null,
           updateSuccess: false,
@@ -92,7 +92,7 @@ describe('User management reducer tests', () => {
           deleteUser.rejected.type,
         ],
         { message: 'something happened' },
-        state => {
+        (state) => {
           expect(state).toMatchObject({
             loading: false,
             updating: false,
@@ -139,7 +139,7 @@ describe('User management reducer tests', () => {
     });
 
     it('should set state to successful update', () => {
-      testMultipleTypes([createUser.fulfilled.type, updateUser.fulfilled.type], { data: 'some handsome user' }, types => {
+      testMultipleTypes([createUser.fulfilled.type, updateUser.fulfilled.type], { data: 'some handsome user' }, (types) => {
         expect(types).toMatchObject({
           updating: false,
           updateSuccess: true,

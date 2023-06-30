@@ -47,7 +47,7 @@ describe('Entities reducer tests', () => {
   }
 
   function testMultipleTypes(types, payload, testFunction, error?) {
-    types.forEach(e => {
+    types.forEach((e) => {
       testFunction(reducer(undefined, { type: e, payload, error }));
     });
   }
@@ -60,7 +60,7 @@ describe('Entities reducer tests', () => {
 
   describe('Requests', () => {
     it('should set state to loading', () => {
-      testMultipleTypes([getEntities.pending.type, getEntity.pending.type], {}, state => {
+      testMultipleTypes([getEntities.pending.type, getEntity.pending.type], {}, (state) => {
         expect(state).toMatchObject({
           errorMessage: null,
           updateSuccess: false,
@@ -73,7 +73,7 @@ describe('Entities reducer tests', () => {
       testMultipleTypes(
         [createEntity.pending.type, updateEntity.pending.type, partialUpdateEntity.pending.type, deleteEntity.pending.type],
         {},
-        state => {
+        (state) => {
           expect(state).toMatchObject({
             errorMessage: null,
             updateSuccess: false,
@@ -102,7 +102,7 @@ describe('Entities reducer tests', () => {
           deleteEntity.rejected.type,
         ],
         'some message',
-        state => {
+        (state) => {
           expect(state).toMatchObject({
             errorMessage: 'error message',
             updateSuccess: false,

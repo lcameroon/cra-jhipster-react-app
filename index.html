@@ -8,10 +8,10 @@
     <meta name="google" content="notranslate" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="theme-color" content="#000000" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.webapp" />
-    <link rel="stylesheet" href="%PUBLIC_URL%/css/loading.css" />
+    <link rel="apple-touch-icon" href="/logo192.png" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="manifest" href="/manifest.webapp" />
+    <link rel="stylesheet" href="/css/loading.css" />
   </head>
   <body>
     <!--[if lt IE 9]>
@@ -73,22 +73,18 @@
           <h3>If you have a bug or a feature request</h3>
           <p>
             First read our
-            <a href="/" target="_blank" rel="noopener noreferrer"
-              >contributing guidelines</a
-            >.
+            <a href="/" target="_blank" rel="noopener noreferrer">contributing guidelines</a>.
           </p>
           <p>
             Then, fill a ticket on our
-            <a href="/" target="_blank" rel="noopener noreferrer"
-              >bug tracker</a
-            >, we'll be happy to resolve your issue!
+            <a href="/" target="_blank" rel="noopener noreferrer">bug tracker</a>, we'll be happy to resolve your issue!
           </p>
 
           <h3>If you want to chat with contributors and other users</h3>
           <p>
             Join our chat room on
-            <a href="/" target="_blank" rel="noopener noreferrer">Gitter.im</a>. Please note
-            that this is a public chat room, and that we expect you to respect other people and write in a correct English language!
+            <a href="/" target="_blank" rel="noopener noreferrer">Gitter.im</a>. Please note that this is a public chat room, and that we
+            expect you to respect other people and write in a correct English language!
           </p>
           <!-- end of troubleshooting content -->
         </div>
@@ -99,6 +95,9 @@
       <h1>You must enable JavaScript to view this page.</h1>
     </noscript>
 
+    <script>
+      var global = global || window;
+    </script>
     <script type="text/javascript">
       // show an error message if the app loading takes more than 4 sec
       window.onload = function () {
@@ -111,6 +110,10 @@
         }
       }
     </script>
+
+    <!-- Add entry point 👇 -->
+    <script type="module" src="/src/index.tsx"></script>
+
     <!-- uncomment this for adding service worker
     <script>
       if ('serviceWorker' in navigator) {

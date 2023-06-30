@@ -6,7 +6,8 @@ tabWidth: 2
 useTabs: false
 
 # js and ts rules:
-arrowParens: avoid
+arrowParens: always
+bracketSpacing: true
 
 # jsx and tsx rules:
 jsxBracketSameLine: false

@@ -19,10 +19,10 @@ export const Operation = (props: RouteComponentProps<{ url: string }>) => {
   );
   const [sorting, setSorting] = useState(false);
 
-  const operationList = useAppSelector(state => state.operation.entities);
-  const loading = useAppSelector(state => state.operation.loading);
-  const links = useAppSelector(state => state.operation.links);
-  const updateSuccess = useAppSelector(state => state.operation.updateSuccess);
+  const operationList = useAppSelector((state) => state.operation.entities);
+  const loading = useAppSelector((state) => state.operation.loading);
+  const links = useAppSelector((state) => state.operation.links);
+  const updateSuccess = useAppSelector((state) => state.operation.updateSuccess);
 
   const getAllEntities = () => {
     dispatch(
@@ -77,7 +77,7 @@ export const Operation = (props: RouteComponentProps<{ url: string }>) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sorting]);
 
-  const sort = p => () => {
+  const sort = (p: string) => () => {
     dispatch(reset());
     setPaginationState({
       ...paginationState,

@@ -1,12 +1,11 @@
 import 'react-toastify/dist/ReactToastify.css';
 import './app.scss';
-import './config/dayjs.ts';
+import './config/dayjs';
 
 import React, { useEffect } from 'react';
 import { Card } from 'reactstrap';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import { hot } from 'react-hot-loader';
 
 import { useAppDispatch, useAppSelector } from './config/store';
 import { getSession } from './shared/reducers/authentication';
@@ -18,7 +17,7 @@ import ErrorBoundary from './shared/error/error-boundary';
 import { AUTHORITIES } from './config/constants';
 import AppRoutes from './routes';
 
-export const App = () => {
+export const App: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -26,12 +25,12 @@ export const App = () => {
     dispatch(getProfile());
   }, [dispatch]);
 
-  const currentLocale = useAppSelector(state => state.locale.currentLocale);
-  const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
-  const isAdmin = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ADMIN]));
-  const ribbonEnv = useAppSelector(state => state.applicationProfile.ribbonEnv);
-  const isInProduction = useAppSelector(state => state.applicationProfile.inProduction);
-  const isOpenAPIEnabled = useAppSelector(state => state.applicationProfile.isOpenAPIEnabled);
+  const currentLocale = useAppSelector((state) => state.locale.currentLocale);
+  const isAuthenticated = useAppSelector((state) => state.authentication.isAuthenticated);
+  const isAdmin = useAppSelector((state) => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ADMIN]));
+  const ribbonEnv = useAppSelector((state) => state.applicationProfile.ribbonEnv);
+  const isInProduction = useAppSelector((state) => state.applicationProfile.inProduction);
+  const isOpenAPIEnabled = useAppSelector((state) => state.applicationProfile.isOpenAPIEnabled);
 
   const paddingTop = '60px';
   return (
@@ -61,4 +60,4 @@ export const App = () => {
   );
 };
 
-export default hot(module)(App);
+export default App;

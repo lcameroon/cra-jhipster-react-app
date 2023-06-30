@@ -52,14 +52,14 @@ export const UserManagement = (props: RouteComponentProps<any>) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.location.search]);
 
-  const sort = p => () =>
+  const sort = (p) => () =>
     setPagination({
       ...pagination,
       order: pagination.order === ASC ? DESC : ASC,
       sort: p,
     });
 
-  const handlePagination = currentPage =>
+  const handlePagination = (currentPage) =>
     setPagination({
       ...pagination,
       activePage: currentPage,
@@ -69,7 +69,7 @@ export const UserManagement = (props: RouteComponentProps<any>) => {
     getUsersFromProps();
   };
 
-  const toggleActive = user => () =>
+  const toggleActive = (user) => () =>
     dispatch(
       updateUser({
         ...user,
@@ -78,10 +78,10 @@ export const UserManagement = (props: RouteComponentProps<any>) => {
     );
 
   const { match } = props;
-  const account = useAppSelector(state => state.authentication.account);
-  const users = useAppSelector(state => state.userManagement.users);
-  const totalItems = useAppSelector(state => state.userManagement.totalItems);
-  const loading = useAppSelector(state => state.userManagement.loading);
+  const account = useAppSelector((state) => state.authentication.account);
+  const users = useAppSelector((state) => state.userManagement.users);
+  const totalItems = useAppSelector((state) => state.userManagement.totalItems);
+  const loading = useAppSelector((state) => state.userManagement.loading);
 
   return (
     <div>

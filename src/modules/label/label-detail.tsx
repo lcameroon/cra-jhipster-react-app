@@ -16,7 +16,7 @@ export const LabelDetail = (props: RouteComponentProps<{ id: string }>) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const labelEntity = useAppSelector(state => state.label.entity);
+  const labelEntity = useAppSelector((state) => state.label.entity);
 
   return (
     <Row>

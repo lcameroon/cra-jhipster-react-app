@@ -11,7 +11,7 @@ export const ConfigurationPage = () => {
   const [reverseProperties, setReverseProperties] = useState(false);
   const dispatch = useAppDispatch();
 
-  const configuration = useAppSelector(state => state.administration.configuration);
+  const configuration = useAppSelector((state) => state.administration.configuration);
 
   useEffect(() => {
     dispatch(getConfigurations());
@@ -19,17 +19,17 @@ export const ConfigurationPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const changeFilter = evt => setFilter(evt.target.value);
+  const changeFilter = (evt) => setFilter(evt.target.value);
 
-  const envFilterFn = configProp => configProp.toUpperCase().includes(filter.toUpperCase());
+  const envFilterFn = (configProp) => configProp.toUpperCase().includes(filter.toUpperCase());
 
-  const propsFilterFn = configProp => configProp.prefix.toUpperCase().includes(filter.toUpperCase());
+  const propsFilterFn = (configProp) => configProp.prefix.toUpperCase().includes(filter.toUpperCase());
 
   const changeReversePrefix = () => setReversePrefix(!reversePrefix);
 
   const changeReverseProperties = () => setReverseProperties(!reverseProperties);
 
-  const getContextList = contexts =>
+  const getContextList = (contexts) =>
     Object.values(contexts)
       .map((v: any) => v.beans)
       .reduce((acc, e) => ({ ...acc, ...e }));

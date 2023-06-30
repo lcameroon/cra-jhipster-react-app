@@ -7,13 +7,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import appConfig from '../../../config/constants';
 
-export const BrandIcon = props => (
+export const BrandIcon = (props) => (
   <div {...props} className="brand-icon">
     <img src="/images/logo-jhipster.png" alt="Logo" />
   </div>
 );
 
-export const Brand = props => (
+export const Brand = (props) => (
   <NavbarBrand tag={Link} to="/" className="brand-logo">
     <BrandIcon />
     <span className="brand-title">
@@ -23,7 +23,7 @@ export const Brand = props => (
   </NavbarBrand>
 );
 
-export const Home = props => (
+export const Home = (props) => (
   <NavItem>
     <NavLink tag={Link} to="/" className="d-flex align-items-center">
       <FontAwesomeIcon icon="home" />
