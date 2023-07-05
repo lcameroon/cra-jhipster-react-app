@@ -33,7 +33,7 @@ export const getAccount = createAsyncThunk('authentication/get_account', async (
 });
 
 interface IAuthParams {
-  username: string;
+  email: string;
   password: string;
   rememberMe?: boolean;
 }
@@ -41,27 +41,24 @@ interface IAuthParams {
 export const authenticate = createAsyncThunk(
   'authentication/login',
   async (auth: IAuthParams) => axios.post<any>('api/authenticate', auth),
-  {
-    serializeError: serializeAxiosError,
-  }
+  { serializeError: serializeAxiosError }
 );
 
-export const login: (username: string, password: string, rememberMe?: boolean) => AppThunk =
-  (username, password, rememberMe = false) =>
-  async (dispatch) => {
-    const result = await dispatch(authenticate({ username, password, rememberMe }));
-    const response = result.payload as AxiosResponse;
-    const bearerToken = response?.headers?.authorization;
-    if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
-      const jwt = bearerToken.slice(7, bearerToken.length);
+export const login: (email: string, password: string, rememberMe?: boolean) => AppThunk = (email, password, rememberMe = false) => {
+  return async (dispatch) => {
+    const result = await dispatch(authenticate({ email, password, rememberMe }));
+    const { data } = result.payload as AxiosResponse;
+    const { idToken } = data || {};
+    if (idToken) {
       if (rememberMe) {
-        Storage.local.set(AUTH_TOKEN_KEY, jwt);
+        Storage.local.set(AUTH_TOKEN_KEY, idToken);
       } else {
-        Storage.session.set(AUTH_TOKEN_KEY, jwt);
+        Storage.session.set(AUTH_TOKEN_KEY, idToken);
       }
     }
     dispatch(getSession());
   };
+};
 
 export const clearAuthToken = () => {
   if (Storage.local.get(AUTH_TOKEN_KEY)) {
@@ -133,13 +130,13 @@ export const AuthenticationSlice = createSlice({
         errorMessage: action.error.message,
       }))
       .addCase(getAccount.fulfilled, (state, action) => {
-        const isAuthenticated = action.payload && action.payload.data && action.payload.data.activated;
+        const isAuthenticated = action.payload && action.payload?.data && action.payload?.data.isTokenValid;
         return {
           ...state,
           isAuthenticated,
           loading: false,
           sessionHasBeenFetched: true,
-          account: action.payload.data,
+          account: action.payload?.data,
         };
       })
       .addCase(authenticate.pending, (state) => {

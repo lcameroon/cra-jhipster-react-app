@@ -3,8 +3,6 @@ export const config = {
   APP_NAME: import.meta.env.VITE_APP_NAME,
 };
 
-console.log(import.meta.env);
-
 export const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
 export const AUTHORITIES = {

@@ -18,9 +18,9 @@ export const Home: React.FC = () => {
       <Col md="9">
         <h2>Welcome, {config.APP_NAME}!</h2>
         <p className="lead">This is your homepage</p>
-        {account && account.login ? (
+        {account?.email ? (
           <div>
-            <Alert color="success">You are logged in as user {account.login}.</Alert>
+            <Alert color="success">You are logged in as user {account.email}.</Alert>
           </div>
         ) : (
           <div>

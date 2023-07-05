@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Switch } from 'react-router-dom';
-import Loadable from 'react-loadable';
 
 import Login from './modules/login/login';
 import Register from './modules/account/register/register';
@@ -15,19 +14,13 @@ import ErrorBoundaryRoute from './shared/error/error-boundary-route';
 import PageNotFound from './shared/error/page-not-found';
 import { AUTHORITIES } from './config/constants';
 
-const Account = Loadable({
-  loader: () => import('./modules/account'),
-  loading: () => <div>loading ...</div>,
-});
+const Account = lazy(() => import('./modules/account'));
 
-const Admin = Loadable({
-  loader: () => import('./modules/administration'),
-  loading: () => <div>loading ...</div>,
-});
+const Admin = lazy(() => import('./modules/administration'));
 
-const Routes = () => {
+const Routes: React.FC = () => {
   return (
-    <div className="view-routes">
+    <>
       <Switch>
         <ErrorBoundaryRoute path="/login" component={Login} />
         <ErrorBoundaryRoute path="/logout" component={Logout} />
@@ -35,13 +28,29 @@ const Routes = () => {
         <ErrorBoundaryRoute path="/account/activate/:key?" component={Activate} />
         <ErrorBoundaryRoute path="/account/reset/request" component={PasswordResetInit} />
         <ErrorBoundaryRoute path="/account/reset/finish/:key?" component={PasswordResetFinish} />
-        <PrivateRoute path="/admin" component={Admin} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />
-        <PrivateRoute path="/account" component={Account} hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER]} />
+        <PrivateRoute
+          path="/admin"
+          hasAnyAuthorities={[AUTHORITIES.ADMIN]}
+          component={(props) => (
+            <Suspense fallback={<div>Loading...</div>}>
+              <Admin {...props} />
+            </Suspense>
+          )}
+        />
+        <PrivateRoute
+          path="/account"
+          hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER]}
+          component={(props) => (
+            <Suspense fallback={<div>Loading...</div>}>
+              <Account {...props} />
+            </Suspense>
+          )}
+        />
         <ErrorBoundaryRoute path="/" exact component={Home} />
         <PrivateRoute path="/" component={Entities} hasAnyAuthorities={[AUTHORITIES.USER]} />
         <ErrorBoundaryRoute component={PageNotFound} />
       </Switch>
-    </div>
+    </>
   );
 };
 

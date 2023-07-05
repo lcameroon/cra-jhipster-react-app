@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Table, Row, Badge } from 'reactstrap';
 import { TextFormat, JhiPagination, JhiItemCount, getSortState } from 'react-jhipster';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { APP_DATE_FORMAT } from '../../../config/constants';
 import { overridePaginationStateWithQueryParams } from '../../../shared/util/entity-utils';
@@ -88,10 +87,9 @@ export const UserManagement = (props: RouteComponentProps<any>) => {
         Users
         <div className="d-flex justify-content-end">
           <Button className="mr-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh List
+            Refresh List
           </Button>
           <Link to={`${match.url}/new`} className="btn btn-primary jh-create-entity">
-            <FontAwesomeIcon icon="plus" />
             <span> Create a new user</span>
           </Link>
         </div>
@@ -101,46 +99,39 @@ export const UserManagement = (props: RouteComponentProps<any>) => {
           <tr>
             <th className="hand" onClick={sort('id')}>
               ID
-              <FontAwesomeIcon icon="sort" />
             </th>
             <th className="hand" onClick={sort('login')}>
-              Login
-              <FontAwesomeIcon icon="sort" />
+              Name
             </th>
             <th className="hand" onClick={sort('email')}>
               Email
-              <FontAwesomeIcon icon="sort" />
             </th>
             <th />
             <th className="hand" onClick={sort('langKey')}>
               Lang Key
-              <FontAwesomeIcon icon="sort" />
             </th>
             <th>Profiles</th>
             <th className="hand" onClick={sort('createdDate')}>
               Created Date
-              <FontAwesomeIcon icon="sort" />
             </th>
             <th className="hand" onClick={sort('lastModifiedBy')}>
               Last Modified By
-              <FontAwesomeIcon icon="sort" />
             </th>
             <th id="modified-date-sort" className="hand" onClick={sort('lastModifiedDate')}>
               Last Modified Date
-              <FontAwesomeIcon icon="sort" />
             </th>
             <th />
           </tr>
         </thead>
         <tbody>
           {users.map((user, i) => (
-            <tr id={user.login} key={`user-${i}`}>
+            <tr id={user.email} key={`user-${i}`}>
               <td>
-                <Button tag={Link} to={`${match.url}/${user.login}`} color="link" size="sm">
+                <Button tag={Link} to={`${match.url}/${user.id}`} color="link" size="sm">
                   {user.id}
                 </Button>
               </td>
-              <td>{user.login}</td>
+              <td>{user.displayName}</td>
               <td>{user.email}</td>
               <td>
                 {user.activated ? (
@@ -157,9 +148,9 @@ export const UserManagement = (props: RouteComponentProps<any>) => {
               <td>
                 {user.authorities
                   ? user.authorities.map((authority, j) => (
-                      <div key={`user-auth-${i}-${j}`}>
-                        <Badge color="info">{authority}</Badge>
-                      </div>
+                      <Badge key={`user-auth-${i}-${j}`} color="info">
+                        {authority}
+                      </Badge>
                     ))
                   : null}
               </td>
@@ -174,20 +165,14 @@ export const UserManagement = (props: RouteComponentProps<any>) => {
               </td>
               <td className="text-right">
                 <div className="btn-group flex-btn-group-container">
-                  <Button tag={Link} to={`${match.url}/${user.login}`} color="info" size="sm">
-                    <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                  <Button tag={Link} to={`${match.url}/${user.id}`} color="info" size="sm">
+                    View
                   </Button>
-                  <Button tag={Link} to={`${match.url}/${user.login}/edit`} color="primary" size="sm">
-                    <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                  <Button tag={Link} to={`${match.url}/${user.id}/edit`} color="primary" size="sm">
+                    Edit
                   </Button>
-                  <Button
-                    tag={Link}
-                    to={`${match.url}/${user.login}/delete`}
-                    color="danger"
-                    size="sm"
-                    disabled={account.login === user.login}
-                  >
-                    <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                  <Button tag={Link} to={`${match.url}/${user.id}/delete`} color="danger" size="sm" disabled={account.id === user.id}>
+                    Delete
                   </Button>
                 </div>
               </td>

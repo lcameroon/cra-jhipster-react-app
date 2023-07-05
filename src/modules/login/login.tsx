@@ -16,7 +16,7 @@ export const Login = (props: RouteComponentProps<any>) => {
     setShowModal(true);
   }, []);
 
-  const handleLogin = (username, password, rememberMe = false) => dispatch(login(username, password, rememberMe));
+  const handleLogin = (email, password, rememberMe = false) => dispatch(login(email, password, rememberMe));
 
   const handleClose = () => {
     setShowModal(false);

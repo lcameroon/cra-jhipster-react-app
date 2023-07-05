@@ -16,7 +16,7 @@ const initialState = {
 };
 
 const apiUrl = 'api/users';
-const adminUrl = 'api/admin/users';
+const adminUrl = 'api/user';
 
 // Async Actions
 
