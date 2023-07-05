@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getEntity } from './label.reducer';
@@ -21,35 +20,23 @@ export const LabelDetail = (props: RouteComponentProps<{ id: string }>) => {
   return (
     <Row>
       <Col md="8">
-        <h2 data-cy="labelDetailsHeading">
-          <Translate contentKey="jhipsterSampleApplicationReactApp.label.detail.title">Label</Translate>
-        </h2>
+        <h2 data-cy="labelDetailsHeading">Label</h2>
         <dl className="jh-entity-details">
           <dt>
-            <span id="id">
-              <Translate contentKey="global.field.id">ID</Translate>
-            </span>
+            <span id="id">ID</span>
           </dt>
           <dd>{labelEntity.id}</dd>
           <dt>
-            <span id="label">
-              <Translate contentKey="jhipsterSampleApplicationReactApp.label.label">Label</Translate>
-            </span>
+            <span id="label">Label</span>
           </dt>
           <dd>{labelEntity.label}</dd>
         </dl>
         <Button tag={Link} to="/label" replace color="info" data-cy="entityDetailsBackButton">
-          <FontAwesomeIcon icon="arrow-left" />{' '}
-          <span className="d-none d-md-inline">
-            <Translate contentKey="entity.action.back">Back</Translate>
-          </span>
+          <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>
         </Button>
         &nbsp;
         <Button tag={Link} to={`/label/${labelEntity.id}/edit`} replace color="primary">
-          <FontAwesomeIcon icon="pencil-alt" />{' '}
-          <span className="d-none d-md-inline">
-            <Translate contentKey="entity.action.edit">Edit</Translate>
-          </span>
+          <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
         </Button>
       </Col>
     </Row>

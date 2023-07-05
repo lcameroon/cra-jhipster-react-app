@@ -22,8 +22,8 @@ const apiUrl = 'api/account';
 export const saveAccountSettings: (account: any) => AppThunk = (account) => async (dispatch) => {
   await dispatch(updateAccount(account));
 
-  if (Storage.session.get(`locale`)) {
-    Storage.session.remove(`locale`);
+  if (Storage.session.get('locale')) {
+    Storage.session.remove('locale');
   }
 
   dispatch(getSession());

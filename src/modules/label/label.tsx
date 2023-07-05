@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
-import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getEntities } from './label.reducer';
@@ -27,16 +26,14 @@ export const Label = (props: RouteComponentProps<{ url: string }>) => {
   return (
     <div>
       <h2 id="label-heading" data-cy="LabelHeading">
-        <Translate contentKey="jhipsterSampleApplicationReactApp.label.home.title">Labels</Translate>
+        Labels
         <div className="d-flex justify-content-end">
           <Button className="mr-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="jhipsterSampleApplicationReactApp.label.home.refreshListLabel">Refresh List</Translate>
+            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh List
           </Button>
           <Link to={`${match.url}/new`} className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp;
-            <Translate contentKey="jhipsterSampleApplicationReactApp.label.home.createLabel">Create new Label</Translate>
+            &nbsp; Create new Label
           </Link>
         </div>
       </h2>
@@ -45,12 +42,8 @@ export const Label = (props: RouteComponentProps<{ url: string }>) => {
           <Table responsive>
             <thead>
               <tr>
-                <th>
-                  <Translate contentKey="jhipsterSampleApplicationReactApp.label.id">ID</Translate>
-                </th>
-                <th>
-                  <Translate contentKey="jhipsterSampleApplicationReactApp.label.label">Label</Translate>
-                </th>
+                <th>ID</th>
+                <th>Label</th>
                 <th />
               </tr>
             </thead>
@@ -66,22 +59,13 @@ export const Label = (props: RouteComponentProps<{ url: string }>) => {
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${label.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.view">View</Translate>
-                        </span>
+                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
                       </Button>
                       <Button tag={Link} to={`${match.url}/${label.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
-                        <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.edit">Edit</Translate>
-                        </span>
+                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
                       </Button>
                       <Button tag={Link} to={`${match.url}/${label.id}/delete`} color="danger" size="sm" data-cy="entityDeleteButton">
-                        <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.delete">Delete</Translate>
-                        </span>
+                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
                       </Button>
                     </div>
                   </td>
@@ -90,11 +74,7 @@ export const Label = (props: RouteComponentProps<{ url: string }>) => {
             </tbody>
           </Table>
         ) : (
-          !loading && (
-            <div className="alert alert-warning">
-              <Translate contentKey="jhipsterSampleApplicationReactApp.label.home.notFound">No Labels found</Translate>
-            </div>
-          )
+          !loading && <div className="alert alert-warning">No Labels found</div>
         )}
       </div>
     </div>

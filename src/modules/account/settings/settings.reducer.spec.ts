@@ -5,16 +5,11 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import sinon from 'sinon';
-import { TranslatorContext } from 'react-jhipster';
 
 import account, { updateAccount, saveAccountSettings, reset } from './settings.reducer';
 import { getAccount } from '../../../shared/reducers/authentication';
 
 describe('Settings reducer tests', () => {
-  beforeAll(() => {
-    TranslatorContext.registerTranslations('en', {});
-  });
-
   describe('Common tests', () => {
     it('should return the initial state', () => {
       const toTest = account(undefined, { type: '' });

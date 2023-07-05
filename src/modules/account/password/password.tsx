@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { ValidatedField, ValidatedForm } from 'react-jhipster';
 import { Row, Col, Button } from 'reactstrap';
 import { toast } from 'react-toastify';
 
@@ -33,9 +33,9 @@ export const PasswordPage = () => {
 
   useEffect(() => {
     if (successMessage) {
-      toast.success(translate(successMessage));
+      toast.success(successMessage);
     } else if (errorMessage) {
-      toast.success(translate(errorMessage));
+      toast.success(errorMessage);
     }
   }, [successMessage, errorMessage]);
 
@@ -44,30 +44,26 @@ export const PasswordPage = () => {
       <Row className="justify-content-center">
         <Col md="8">
           <h2 id="password-title">
-            <Translate contentKey="password.title" interpolate={{ username: account.login }}>
-              Password for {account.login}
-            </Translate>
+            <span>Password for {account.login}</span>
           </h2>
           <ValidatedForm id="password-form" onSubmit={handleValidSubmit}>
             <ValidatedField
               name="currentPassword"
-              label={translate('global.form.currentpassword.label')}
-              placeholder={translate('global.form.currentpassword.placeholder')}
+              label="Current Password"
               type="password"
               validate={{
-                required: { value: true, message: translate('global.messages.validate.newpassword.required') },
+                required: { value: true, message: 'validate.newpassword.required' },
               }}
               data-cy="currentPassword"
             />
             <ValidatedField
               name="newPassword"
-              label={translate('global.form.newpassword.label')}
-              placeholder={translate('global.form.newpassword.placeholder')}
+              label="New Password"
               type="password"
               validate={{
-                required: { value: true, message: translate('global.messages.validate.newpassword.required') },
-                minLength: { value: 4, message: translate('global.messages.validate.newpassword.minlength') },
-                maxLength: { value: 50, message: translate('global.messages.validate.newpassword.maxlength') },
+                required: { value: true, message: 'validate.newpassword.required' },
+                minLength: { value: 4, message: 'validate.newpassword.minlength' },
+                maxLength: { value: 50, message: 'validate.newpassword.maxlength' },
               }}
               onChange={updatePassword}
               data-cy="newPassword"
@@ -75,19 +71,18 @@ export const PasswordPage = () => {
             <PasswordStrengthBar password={password} />
             <ValidatedField
               name="confirmPassword"
-              label={translate('global.form.confirmpassword.label')}
-              placeholder={translate('global.form.confirmpassword.placeholder')}
+              label="Confirm password"
               type="password"
               validate={{
-                required: { value: true, message: translate('global.messages.validate.confirmpassword.required') },
-                minLength: { value: 4, message: translate('global.messages.validate.confirmpassword.minlength') },
-                maxLength: { value: 50, message: translate('global.messages.validate.confirmpassword.maxlength') },
-                validate: (v) => v === password || translate('global.messages.error.dontmatch'),
+                required: { value: true, message: 'validate.confirmpassword.required' },
+                minLength: { value: 4, message: 'validate.confirmpassword.minlength' },
+                maxLength: { value: 50, message: 'validate.confirmpassword.maxlength' },
+                validate: (v) => v === password || 'error.dontmatch',
               }}
               data-cy="confirmPassword"
             />
             <Button color="success" type="submit" data-cy="submit">
-              <Translate contentKey="password.form.button">Save</Translate>
+              Save
             </Button>
           </ValidatedForm>
         </Col>

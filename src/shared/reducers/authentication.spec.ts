@@ -21,7 +21,7 @@ import authentication, {
   clearAuth,
   initialState,
 } from './authentication';
-import { updateLocale } from './locale';
+import { AUTH_TOKEN_KEY } from '../../config/constants';
 
 describe('Authentication reducer tests', () => {
   function isAccountEmpty(state): boolean {
@@ -173,12 +173,10 @@ describe('Authentication reducer tests', () => {
           type: getAccount.fulfilled.type,
           payload: resolvedObject,
         },
-        updateLocale('en'),
       ];
       await store.dispatch(getSession());
       expect(store.getActions()[0]).toMatchObject(expectedActions[0]);
       expect(store.getActions()[1]).toMatchObject(expectedActions[1]);
-      expect(store.getActions()[2]).toMatchObject(expectedActions[2]);
     });
 
     it('dispatches LOGOUT actions', async () => {
@@ -221,7 +219,6 @@ describe('Authentication reducer tests', () => {
       store = mockStore({ authentication: { account: { langKey: 'en' } } });
     });
     it('clears the storage token on clearAuthToken', async () => {
-      const AUTH_TOKEN_KEY = 'jhi-authenticationToken';
       const loginResponse = { headers: { authorization: 'Bearer TestToken' } };
       axios.post = sinon.stub().returns(Promise.resolve(loginResponse));
 

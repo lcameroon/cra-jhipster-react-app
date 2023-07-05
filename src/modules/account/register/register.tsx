@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Translate, translate, ValidatedField, ValidatedForm, isEmail } from 'react-jhipster';
+import { ValidatedField, ValidatedForm, isEmail } from 'react-jhipster';
 import { Row, Col, Alert, Button } from 'reactstrap';
 import { toast } from 'react-toastify';
 
@@ -15,14 +15,11 @@ export const RegisterPage = () => {
     () => () => {
       dispatch(reset());
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [] // eslint-disable-line
   );
 
-  const currentLocale = useAppSelector((state) => state.locale.currentLocale);
-
   const handleValidSubmit: any = ({ username, email, firstPassword }) => {
-    dispatch(handleRegister({ login: username, email, password: firstPassword, langKey: currentLocale }));
+    dispatch(handleRegister({ login: username, email, password: firstPassword, langKey: 'en' }));
   };
 
   const updatePassword = (event) => setPassword(event.target.value);
@@ -31,7 +28,7 @@ export const RegisterPage = () => {
 
   useEffect(() => {
     if (successMessage) {
-      toast.success(translate(successMessage));
+      toast.success(successMessage);
     }
   }, [successMessage]);
 
@@ -40,7 +37,7 @@ export const RegisterPage = () => {
       <Row className="justify-content-center">
         <Col md="8">
           <h1 id="register-title" data-cy="registerTitle">
-            <Translate contentKey="register.title">Registration</Translate>
+            Registration
           </h1>
         </Col>
       </Row>
@@ -49,77 +46,63 @@ export const RegisterPage = () => {
           <ValidatedForm id="register-form" onSubmit={handleValidSubmit}>
             <ValidatedField
               name="username"
-              label={translate('global.form.username.label')}
-              placeholder={translate('global.form.username.placeholder')}
+              label="Username"
               validate={{
-                required: { value: true, message: translate('register.messages.validate.login.required') },
-                pattern: {
-                  value: /^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$/,
-                  message: translate('register.messages.validate.login.pattern'),
-                },
-                minLength: { value: 1, message: translate('register.messages.validate.login.minlength') },
-                maxLength: { value: 50, message: translate('register.messages.validate.login.maxlength') },
+                required: { value: true, message: 'validate.login.required' },
+                minLength: { value: 1, message: 'validate.login.minlength' },
+                maxLength: { value: 50, message: 'validate.login.maxlength' },
               }}
               data-cy="username"
             />
             <ValidatedField
               name="email"
-              label={translate('global.form.email.label')}
-              placeholder={translate('global.form.email.placeholder')}
+              label="E-mail"
               type="email"
               validate={{
-                required: { value: true, message: translate('global.messages.validate.email.required') },
-                minLength: { value: 5, message: translate('global.messages.validate.email.minlength') },
-                maxLength: { value: 254, message: translate('global.messages.validate.email.maxlength') },
-                validate: (v) => isEmail(v) || translate('global.messages.validate.email.invalid'),
+                required: { value: true, message: 'validate.email.required' },
+                minLength: { value: 5, message: 'validate.email.minlength' },
+                maxLength: { value: 254, message: 'validate.email.maxlength' },
+                validate: (v) => isEmail(v) || 'validate.email.invalid',
               }}
               data-cy="email"
             />
             <ValidatedField
               name="firstPassword"
-              label={translate('global.form.newpassword.label')}
-              placeholder={translate('global.form.newpassword.placeholder')}
+              label="New password"
               type="password"
               onChange={updatePassword}
               validate={{
-                required: { value: true, message: translate('global.messages.validate.newpassword.required') },
-                minLength: { value: 4, message: translate('global.messages.validate.newpassword.minlength') },
-                maxLength: { value: 50, message: translate('global.messages.validate.newpassword.maxlength') },
+                required: { value: true, message: 'validate.newpassword.required' },
+                minLength: { value: 4, message: 'validate.newpassword.minlength' },
+                maxLength: { value: 50, message: 'validate.newpassword.maxlength' },
               }}
               data-cy="firstPassword"
             />
             <PasswordStrengthBar password={password} />
             <ValidatedField
               name="secondPassword"
-              label={translate('global.form.confirmpassword.label')}
-              placeholder={translate('global.form.confirmpassword.placeholder')}
+              label="Confirm password"
               type="password"
               validate={{
-                required: { value: true, message: translate('global.messages.validate.confirmpassword.required') },
-                minLength: { value: 4, message: translate('global.messages.validate.confirmpassword.minlength') },
-                maxLength: { value: 50, message: translate('global.messages.validate.confirmpassword.maxlength') },
-                validate: (v) => v === password || translate('global.messages.error.dontmatch'),
+                required: { value: true, message: 'validate.confirmpassword.required' },
+                minLength: { value: 4, message: 'validate.confirmpassword.minlength' },
+                maxLength: { value: 50, message: 'validate.confirmpassword.maxlength' },
+                validate: (v) => v === password || 'error.dontmatch',
               }}
               data-cy="secondPassword"
             />
             <Button id="register-submit" color="primary" type="submit" data-cy="submit">
-              <Translate contentKey="register.form.button">Register</Translate>
+              Register
             </Button>
           </ValidatedForm>
           <p>&nbsp;</p>
           <Alert color="warning">
+            <span>If you want to </span>
+            <span className="alert-link">sign in </span>
             <span>
-              <Translate contentKey="global.messages.info.authenticated.prefix">If you want to </Translate>
-            </span>
-            <span className="alert-link">
-              <Translate contentKey="global.messages.info.authenticated.link"> sign in</Translate>
-            </span>
-            <span>
-              <Translate contentKey="global.messages.info.authenticated.suffix">
-                , you can try the default accounts:
-                <br />- Administrator (login=&quot;admin&quot; and password=&quot;admin&quot;)
-                <br />- User (login=&quot;user&quot; and password=&quot;user&quot;).
-              </Translate>
+              , you can try the default accounts:
+              <br />- Administrator (login=&quot;admin&quot; and password=&quot;admin&quot;)
+              <br />- User (login=&quot;user&quot; and password=&quot;user&quot;).
             </span>
           </Alert>
         </Col>

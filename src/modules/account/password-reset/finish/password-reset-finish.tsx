@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Col, Row, Button } from 'reactstrap';
-import { Translate, translate, getUrlParameter, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { getUrlParameter, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { RouteComponentProps } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -32,13 +32,12 @@ export const PasswordResetFinishPage = (props: RouteComponentProps<{ key: string
       <ValidatedForm onSubmit={handleValidSubmit}>
         <ValidatedField
           name="newPassword"
-          label={translate('global.form.newpassword.label')}
-          placeholder={translate('global.form.newpassword.placeholder')}
+          label="New Password"
           type="password"
           validate={{
-            required: { value: true, message: translate('global.messages.validate.newpassword.required') },
-            minLength: { value: 4, message: translate('global.messages.validate.newpassword.minlength') },
-            maxLength: { value: 50, message: translate('global.messages.validate.newpassword.maxlength') },
+            required: { value: true, message: 'validate.newpassword.required' },
+            minLength: { value: 4, message: 'validate.newpassword.minlength' },
+            maxLength: { value: 50, message: 'validate.newpassword.maxlength' },
           }}
           onChange={updatePassword}
           data-cy="resetPassword"
@@ -46,19 +45,18 @@ export const PasswordResetFinishPage = (props: RouteComponentProps<{ key: string
         <PasswordStrengthBar password={password} />
         <ValidatedField
           name="confirmPassword"
-          label={translate('global.form.confirmpassword.label')}
-          placeholder={translate('global.form.confirmpassword.placeholder')}
+          label="Confirm Password"
           type="password"
           validate={{
-            required: { value: true, message: translate('global.messages.validate.confirmpassword.required') },
-            minLength: { value: 4, message: translate('global.messages.validate.confirmpassword.minlength') },
-            maxLength: { value: 50, message: translate('global.messages.validate.confirmpassword.maxlength') },
-            validate: (v) => v === password || translate('global.messages.error.dontmatch'),
+            required: { value: true, message: 'validate.confirmpassword.required' },
+            minLength: { value: 4, message: 'validate.confirmpassword.minlength' },
+            maxLength: { value: 50, message: 'validate.confirmpassword.maxlength' },
+            validate: (v) => v === password || 'error.dontmatch',
           }}
           data-cy="confirmResetPassword"
         />
         <Button color="success" type="submit" data-cy="submit">
-          <Translate contentKey="reset.finish.form.button">Validate new password</Translate>
+          Validate new password
         </Button>
       </ValidatedForm>
     );
@@ -68,7 +66,7 @@ export const PasswordResetFinishPage = (props: RouteComponentProps<{ key: string
 
   useEffect(() => {
     if (successMessage) {
-      toast.success(translate(successMessage));
+      toast.success(successMessage);
     }
   }, [successMessage]);
 
@@ -76,9 +74,7 @@ export const PasswordResetFinishPage = (props: RouteComponentProps<{ key: string
     <div>
       <Row className="justify-content-center">
         <Col md="4">
-          <h1>
-            <Translate contentKey="reset.finish.title">Reset password</Translate>
-          </h1>
+          <h1>Reset password</h1>
           <div>{key ? getResetForm() : null}</div>
         </Col>
       </Row>

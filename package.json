@@ -3,11 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prestart": "npm run i18n",
     "start": "vite",
     "serve": "vite preview",
     "----------- BUILD ------------------": "",
-    "prebuild": "npm run i18n",
     "build": "tsc && vite build",
     "----------- TEST --------------------": "",
     "test": "jest --colors --passWithNoTests",
@@ -18,7 +16,7 @@
     "release": "VERSION=$(node -pe \"require('./package.json').version\") && git add . && git commit -m 'Bump version' --no-verify && git tag -a v$VERSION -m 'v$VERSION'",
     "postrelease": "git push --follow-tags --no-verify",
     "----------- MISC -------------------": "",
-    "i18n": "node i18n.js"
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "1.2.35",
@@ -42,7 +40,7 @@
     "react-router-dom": "5.2.0",
     "react-toastify": "7.0.4",
     "react-transition-group": "4.4.2",
-    "reactstrap": "8.9.0",
+    "reactstrap": "9.2.0",
     "redux": "4.1.0",
     "redux-mock-store": "1.5.4",
     "redux-thunk": "2.3.0",

@@ -1,10 +1,11 @@
-const config = {
-  VERSION: import.meta.env.VERSION,
+export const config = {
+  VERSION: import.meta.env.VITE_VERSION,
+  APP_NAME: import.meta.env.VITE_APP_NAME,
 };
 
-export default config;
+console.log(import.meta.env);
 
-export const SERVER_API_URL = import.meta.env.SERVER_API_URL;
+export const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
 export const AUTHORITIES = {
   ADMIN: 'ROLE_ADMIN',
@@ -14,6 +15,8 @@ export const AUTHORITIES = {
 export const messages = {
   DATA_ERROR_ALERT: 'Internal Error',
 };
+
+export const AUTH_TOKEN_KEY = 'jhi-authenticationToken';
 
 export const APP_DATE_FORMAT = 'DD/MM/YY HH:mm';
 export const APP_TIMESTAMP_FORMAT = 'DD/MM/YY HH:mm:ss';

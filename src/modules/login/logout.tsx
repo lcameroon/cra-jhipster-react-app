@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../config/store';
 import { logout } from '../../shared/reducers/authentication';
 
 export const Logout = () => {
-  const logoutUrl = useAppSelector(state => state.authentication.logoutUrl);
-  const idToken = useAppSelector(state => state.authentication.idToken);
+  const logoutUrl = useAppSelector((state) => state.authentication.logoutUrl);
+  const idToken = useAppSelector((state) => state.authentication.idToken);
   const dispatch = useAppDispatch();
 
   useLayoutEffect(() => {

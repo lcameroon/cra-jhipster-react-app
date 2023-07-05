@@ -18,7 +18,7 @@ import { defaultValue } from '../../../shared/model/user.model';
 import { AUTHORITIES } from '../../../config/constants';
 
 describe('User management reducer tests', () => {
-  const username = import.meta.env.E2E_USERNAME ?? 'admin';
+  const username = 'admin';
 
   function isEmpty(element): boolean {
     if (element instanceof Array) {

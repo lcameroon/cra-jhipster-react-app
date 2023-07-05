@@ -1,6 +1,5 @@
 import { loadingBarReducer as loadingBar } from 'react-redux-loading-bar';
 
-import locale from './locale';
 import authentication from './authentication';
 import applicationProfile from './application-profile';
 
@@ -15,13 +14,12 @@ import passwordReset from '../../modules/account/password-reset/password-reset.r
 import bankAccount from '../../modules/bank-account/bank-account.reducer';
 // prettier-ignore
 import label from '../../modules/label/label.reducer';
-// prettier-ignore
-import operation from '../../modules/operation/operation.reducer';
 /* add reducer here */
 
 const rootReducer = {
+  loadingBar,
+  /* add reducer here */
   authentication,
-  locale,
   applicationProfile,
   administration,
   userManagement,
@@ -32,9 +30,6 @@ const rootReducer = {
   settings,
   bankAccount,
   label,
-  operation,
-  /* add reducer here */
-  loadingBar,
 };
 
 export default rootReducer;

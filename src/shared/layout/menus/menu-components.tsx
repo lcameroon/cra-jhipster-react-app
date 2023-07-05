@@ -8,7 +8,7 @@ export const NavDropdown = (props) => (
       <FontAwesomeIcon icon={props.icon} />
       <span>{props.name}</span>
     </DropdownToggle>
-    <DropdownMenu right style={props.style}>
+    <DropdownMenu end style={props.style}>
       {props.children}
     </DropdownMenu>
   </UncontrolledDropdown>
