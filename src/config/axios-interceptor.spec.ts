@@ -2,25 +2,24 @@
  * @jest-environment jsdom
  */
 import axios from 'axios';
-import sinon from 'sinon';
 
 import setupAxiosInterceptors from './axios-interceptor';
 
 describe('Axios Interceptor', () => {
   describe('setupAxiosInterceptors', () => {
     const client = axios;
-    const onUnauthenticated = sinon.spy();
+    const onUnauthenticated = jest.fn();
     setupAxiosInterceptors(onUnauthenticated);
 
-    xit('onRequestSuccess is called on fulfilled request', () => {
+    it.skip('onRequestSuccess is called on fulfilled request', () => {
       expect((client.interceptors.request as any).handlers[0].fulfilled({ data: 'foo', url: '/test' })).toMatchObject({
         data: 'foo',
       });
     });
-    xit('onResponseSuccess is called on fulfilled response', () => {
+    it.skip('onResponseSuccess is called on fulfilled response', () => {
       expect((client.interceptors.response as any).handlers[0].fulfilled({ data: 'foo' })).toEqual({ data: 'foo' });
     });
-    xit('onResponseError is called on rejected response', () => {
+    it.skip('onResponseError is called on rejected response', () => {
       (client.interceptors.response as any).handlers[0].rejected({
         response: {
           statusText: 'NotFound',

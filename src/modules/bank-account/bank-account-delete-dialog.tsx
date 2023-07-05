@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAppDispatch, useAppSelector } from '../../config/store';
 import { getEntity, deleteEntity } from './bank-account.reducer';
@@ -42,12 +41,10 @@ export const BankAccountDeleteDialog = (props: RouteComponentProps<{ id: string 
       </ModalBody>
       <ModalFooter>
         <Button color="secondary" onClick={handleClose}>
-          <FontAwesomeIcon icon="ban" />
-          &nbsp; Cancel
+          Cancel
         </Button>
         <Button id="jhi-confirm-delete-bankAccount" data-cy="entityConfirmDeleteButton" color="danger" onClick={confirmDelete}>
-          <FontAwesomeIcon icon="trash" />
-          &nbsp; Delete
+          Delete
         </Button>
       </ModalFooter>
     </Modal>

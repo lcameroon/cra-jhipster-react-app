@@ -1,6 +1,5 @@
 import thunk from 'redux-thunk';
 import axios from 'axios';
-import sinon from 'sinon';
 import configureStore from 'redux-mock-store';
 
 import password, { savePassword, reset } from './password.reducer';
@@ -65,7 +64,7 @@ describe('Password reducer tests', () => {
     beforeEach(() => {
       const mockStore = configureStore([thunk]);
       store = mockStore({});
-      axios.post = sinon.stub().returns(Promise.resolve(resolvedObject));
+      axios.post = jest.fn().mockResolvedValue(resolvedObject);
     });
 
     it('dispatches UPDATE_PASSWORD_PENDING and UPDATE_PASSWORD_FULFILLED actions', async () => {

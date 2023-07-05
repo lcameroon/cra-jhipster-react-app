@@ -1,6 +1,5 @@
 import thunk from 'redux-thunk';
 import axios from 'axios';
-import sinon from 'sinon';
 import configureStore from 'redux-mock-store';
 
 import register, { handleRegister, reset } from './register.reducer';
@@ -69,7 +68,7 @@ describe('Creating account tests', () => {
     beforeEach(() => {
       const mockStore = configureStore([thunk]);
       store = mockStore({});
-      axios.post = sinon.stub().returns(Promise.resolve(resolvedObject));
+      axios.post = jest.fn().mockResolvedValue(resolvedObject);
     });
 
     it('dispatches CREATE_ACCOUNT_PENDING and CREATE_ACCOUNT_FULFILLED actions', async () => {

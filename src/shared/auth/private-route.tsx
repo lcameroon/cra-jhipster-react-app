@@ -3,6 +3,7 @@ import { Route, Redirect, RouteProps } from 'react-router-dom';
 
 import { useAppSelector } from '../../config/store';
 import ErrorBoundary from '../error/error-boundary';
+import { hasAnyAuthority } from './hasAnyAuthority';
 
 interface IOwnProps extends RouteProps {
   hasAnyAuthorities?: string[];
@@ -46,16 +47,6 @@ export const PrivateRouteComponent = ({ component: Component, hasAnyAuthorities 
   if (!Component) throw new Error(`A component needs to be specified for private route for path ${(rest as any).path}`);
 
   return <Route {...rest} render={renderRedirect} />;
-};
-
-export const hasAnyAuthority = (authorities: string[], hasAnyAuthorities: string[]) => {
-  if (authorities && authorities.length !== 0) {
-    if (hasAnyAuthorities.length === 0) {
-      return true;
-    }
-    return hasAnyAuthorities.some((auth) => authorities.includes(auth));
-  }
-  return false;
 };
 
 /**

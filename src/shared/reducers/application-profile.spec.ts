@@ -1,6 +1,5 @@
 import thunk from 'redux-thunk';
 import axios from 'axios';
-import sinon from 'sinon';
 import configureStore from 'redux-mock-store';
 
 import profile, { getProfile } from './application-profile';
@@ -55,7 +54,7 @@ describe('Profile reducer tests', () => {
     beforeEach(() => {
       const mockStore = configureStore([thunk]);
       store = mockStore({});
-      axios.get = sinon.stub().returns(Promise.resolve(resolvedObject));
+      axios.get = jest.fn().mockResolvedValue(resolvedObject);
     });
 
     it('dispatches GET_SESSION_PENDING and GET_SESSION_FULFILLED actions', async () => {

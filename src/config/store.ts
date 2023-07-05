@@ -7,15 +7,21 @@ import notificationMiddleware from './notification-middleware';
 import loggerMiddleware from './logger-middleware';
 import { loadingBarMiddleware } from 'react-redux-loading-bar';
 
+const defaultMiddlewares = [
+  errorMiddleware,
+  notificationMiddleware,
+  loggerMiddleware,
+  loadingBarMiddleware({
+    promiseTypeSuffixes: ['pending', 'fulfilled', 'rejected'],
+  }),
+];
+
 const store = configureStore({
   reducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        // Ignore these field paths in all actions
-        ignoredActionPaths: ['payload.config', 'payload.request', 'error', 'meta.arg'],
-      },
-    }).concat(errorMiddleware, notificationMiddleware, loadingBarMiddleware(), loggerMiddleware),
+      serializableCheck: false,
+    }).concat(...defaultMiddlewares),
 });
 
 const getStore = () => {

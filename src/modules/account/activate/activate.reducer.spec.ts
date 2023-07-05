@@ -1,9 +1,10 @@
 import thunk from 'redux-thunk';
 import axios from 'axios';
-import sinon from 'sinon';
 import configureStore from 'redux-mock-store';
 
 import activate, { activateAction, reset } from './activate.reducer';
+
+jest.mock('axios');
 
 describe('Activate reducer tests', () => {
   it('should return the initial state', () => {
@@ -58,7 +59,7 @@ describe('Activate reducer tests', () => {
     beforeEach(() => {
       const mockStore = configureStore([thunk]);
       store = mockStore({});
-      axios.get = sinon.stub().returns(Promise.resolve(resolvedObject));
+      axios.get = jest.fn().mockResolvedValue(resolvedObject);
     });
 
     it('dispatches ACTIVATE_ACCOUNT_PENDING and ACTIVATE_ACCOUNT_FULFILLED actions', async () => {

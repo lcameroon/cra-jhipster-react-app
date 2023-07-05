@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Badge } from 'reactstrap';
 import { TextFormat } from 'react-jhipster';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { APP_DATE_FORMAT } from '../../../config/constants';
 import { useAppDispatch, useAppSelector } from '../../../config/store';
@@ -65,7 +64,7 @@ export const UserManagementDetail = (props: RouteComponentProps<{ login: string 
         </dl>
       </Row>
       <Button tag={Link} to="/admin/user-management" replace color="info">
-        <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>
+        <span className="d-none d-md-inline">Back</span>
       </Button>
     </div>
   );

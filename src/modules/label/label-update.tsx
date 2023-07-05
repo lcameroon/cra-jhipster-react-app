@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
 import { ValidatedField, ValidatedForm } from 'react-jhipster';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getEntity, updateEntity, createEntity, reset } from './label.reducer';
 import { useAppDispatch, useAppSelector } from '../../config/store';
@@ -86,14 +85,11 @@ export const LabelUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 }}
               />
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/label" replace color="info">
-                <FontAwesomeIcon icon="arrow-left" />
-                &nbsp;
-                <span className="d-none d-md-inline">Back</span>
+                Back
               </Button>
               &nbsp;
               <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
-                <FontAwesomeIcon icon="save" />
-                &nbsp; Save
+                Save
               </Button>
             </ValidatedForm>
           )}

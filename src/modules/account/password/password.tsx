@@ -15,11 +15,11 @@ export const PasswordPage = () => {
   useEffect(() => {
     dispatch(reset());
     dispatch(getSession());
+
     return () => {
       dispatch(reset());
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); // eslint-disable-line
 
   const handleValidSubmit: any = ({ currentPassword, newPassword }) => {
     dispatch(savePassword({ currentPassword, newPassword }));
@@ -44,7 +44,7 @@ export const PasswordPage = () => {
       <Row className="justify-content-center">
         <Col md="8">
           <h2 id="password-title">
-            <span>Password for {account.login}</span>
+            <span>Password for {account.email}</span>
           </h2>
           <ValidatedForm id="password-form" onSubmit={handleValidSubmit}>
             <ValidatedField

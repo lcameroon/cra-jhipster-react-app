@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAppDispatch, useAppSelector } from '../../config/store';
 import { getEntity, deleteEntity } from './label.reducer';
@@ -40,12 +39,10 @@ export const LabelDeleteDialog = (props: RouteComponentProps<{ id: string }>) =>
       <ModalBody id="jhipsterSampleApplicationReactApp.label.delete.question">Are you sure you want to delete this Label?</ModalBody>
       <ModalFooter>
         <Button color="secondary" onClick={handleClose}>
-          <FontAwesomeIcon icon="ban" />
-          &nbsp; Cancel
+          Cancel
         </Button>
         <Button id="jhi-confirm-delete-label" data-cy="entityConfirmDeleteButton" color="danger" onClick={confirmDelete}>
-          <FontAwesomeIcon icon="trash" />
-          &nbsp; Delete
+          Delete
         </Button>
       </ModalFooter>
     </Modal>

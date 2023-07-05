@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getEntity } from './label.reducer';
 // import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from '../../config/constants';
@@ -32,11 +31,11 @@ export const LabelDetail = (props: RouteComponentProps<{ id: string }>) => {
           <dd>{labelEntity.label}</dd>
         </dl>
         <Button tag={Link} to="/label" replace color="info" data-cy="entityDetailsBackButton">
-          <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>
+          Back
         </Button>
         &nbsp;
         <Button tag={Link} to={`/label/${labelEntity.id}/edit`} replace color="primary">
-          <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+          Edit
         </Button>
       </Col>
     </Row>

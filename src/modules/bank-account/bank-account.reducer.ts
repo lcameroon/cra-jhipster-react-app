@@ -34,9 +34,9 @@ export const getEntity = createAsyncThunk(
 
 export const createEntity = createAsyncThunk(
   'bankAccount/create_entity',
-  async (entity: IBankAccount, thunkAPI) => {
+  async (entity: IBankAccount, { dispatch }) => {
     const result = await axios.post<IBankAccount>(apiUrl, cleanEntity(entity));
-    thunkAPI.dispatch(getEntities({}));
+    await dispatch(getEntities({}));
     return result;
   },
   { serializeError: serializeAxiosError }
@@ -44,9 +44,9 @@ export const createEntity = createAsyncThunk(
 
 export const updateEntity = createAsyncThunk(
   'bankAccount/update_entity',
-  async (entity: IBankAccount, thunkAPI) => {
+  async (entity: IBankAccount, { dispatch }) => {
     const result = await axios.put<IBankAccount>(`${apiUrl}/${entity.id}`, cleanEntity(entity));
-    thunkAPI.dispatch(getEntities({}));
+    await dispatch(getEntities({}));
     return result;
   },
   { serializeError: serializeAxiosError }
@@ -54,9 +54,9 @@ export const updateEntity = createAsyncThunk(
 
 export const partialUpdateEntity = createAsyncThunk(
   'bankAccount/partial_update_entity',
-  async (entity: IBankAccount, thunkAPI) => {
+  async (entity: IBankAccount, { dispatch }) => {
     const result = await axios.patch<IBankAccount>(`${apiUrl}/${entity.id}`, cleanEntity(entity));
-    thunkAPI.dispatch(getEntities({}));
+    await dispatch(getEntities({}));
     return result;
   },
   { serializeError: serializeAxiosError }
@@ -64,10 +64,10 @@ export const partialUpdateEntity = createAsyncThunk(
 
 export const deleteEntity = createAsyncThunk(
   'bankAccount/delete_entity',
-  async (id: string, thunkAPI) => {
+  async (id: string, { dispatch }) => {
     const requestUrl = `${apiUrl}/${id}`;
     const result = await axios.delete<IBankAccount>(requestUrl);
-    thunkAPI.dispatch(getEntities({}));
+    // await dispatch(getEntities({}));
     return result;
   },
   { serializeError: serializeAxiosError }

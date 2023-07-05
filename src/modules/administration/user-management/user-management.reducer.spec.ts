@@ -2,7 +2,6 @@
 import configureStore from 'redux-mock-store';
 import axios from 'axios';
 import thunk from 'redux-thunk';
-import sinon from 'sinon';
 
 import userManagement, {
   getUsers,
@@ -16,6 +15,13 @@ import userManagement, {
 } from './user-management.reducer';
 import { defaultValue } from '../../../shared/model/user.model';
 import { AUTHORITIES } from '../../../config/constants';
+
+jest.mock('../../../config/constants', () => ({
+  AUTHORITIES: {
+    ADMIN: 'ROLE_ADMIN',
+    USER: 'ROLE_USER',
+  },
+}));
 
 describe('User management reducer tests', () => {
   const username = 'admin';
@@ -186,10 +192,10 @@ describe('User management reducer tests', () => {
     beforeEach(() => {
       const mockStore = configureStore([thunk]);
       store = mockStore({});
-      axios.get = sinon.stub().returns(Promise.resolve(resolvedObject));
-      axios.put = sinon.stub().returns(Promise.resolve(resolvedObject));
-      axios.post = sinon.stub().returns(Promise.resolve(resolvedObject));
-      axios.delete = sinon.stub().returns(Promise.resolve(resolvedObject));
+      axios.get = jest.fn().mockResolvedValue(resolvedObject);
+      axios.put = jest.fn().mockResolvedValue(resolvedObject);
+      axios.post = jest.fn().mockResolvedValue(resolvedObject);
+      axios.delete = jest.fn().mockResolvedValue(resolvedObject);
     });
 
     it('dispatches FETCH_USERS_AS_ADMIN_PENDING and FETCH_USERS_AS_ADMIN_FULFILLED actions', async () => {

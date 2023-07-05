@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getUser, deleteUser } from './user-management.reducer';
 import { useAppDispatch, useAppSelector } from '../../../config/store';
@@ -32,12 +31,10 @@ export const UserManagementDeleteDialog = (props: RouteComponentProps<{ login: s
       <ModalBody>Are you sure you want to delete this User?</ModalBody>
       <ModalFooter>
         <Button color="secondary" onClick={handleClose}>
-          <FontAwesomeIcon icon="ban" />
-          &nbsp; Cancel
+          Cancel
         </Button>
         <Button color="danger" onClick={confirmDelete}>
-          <FontAwesomeIcon icon="trash" />
-          &nbsp; Delete
+          Delete
         </Button>
       </ModalFooter>
     </Modal>

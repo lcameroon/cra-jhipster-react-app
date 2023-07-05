@@ -1,6 +1,6 @@
 /* eslint no-console: off */
 const loggerMiddleware = () => (next) => (action) => {
-  if (import.meta.env.DEV) {
+  if (import.meta.env?.DEV) {
     const { type, payload, meta, error } = action;
 
     console.groupCollapsed(type);

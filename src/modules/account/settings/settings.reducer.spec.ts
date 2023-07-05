@@ -4,7 +4,6 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import axios from 'axios';
-import sinon from 'sinon';
 
 import account, { updateAccount, saveAccountSettings, reset } from './settings.reducer';
 import { getAccount } from '../../../shared/reducers/authentication';
@@ -69,8 +68,8 @@ describe('Settings reducer tests', () => {
     beforeEach(() => {
       const mockStore = configureStore([thunk]);
       store = mockStore({ authentication: { account: { langKey: 'en' } } });
-      axios.get = sinon.stub().returns(Promise.resolve(resolvedObject));
-      axios.post = sinon.stub().returns(Promise.resolve(resolvedObject));
+      axios.get = jest.fn().mockResolvedValue(resolvedObject);
+      axios.post = jest.fn().mockResolvedValue(resolvedObject);
     });
 
     it('dispatches UPDATE_ACCOUNT_PENDING and UPDATE_ACCOUNT_FULFILLED actions', async () => {

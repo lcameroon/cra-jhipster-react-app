@@ -1,9 +1,9 @@
 export const config = {
-  VERSION: import.meta.env.VITE_VERSION,
-  APP_NAME: import.meta.env.VITE_APP_NAME,
+  VERSION: import.meta.env?.VITE_VERSION,
+  APP_NAME: import.meta.env?.VITE_APP_NAME,
 };
 
-export const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
+export const SERVER_API_URL = import.meta.env?.VITE_SERVER_API_URL;
 
 export const AUTHORITIES = {
   ADMIN: 'ROLE_ADMIN',

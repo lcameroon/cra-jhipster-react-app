@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from './config/store';
 import { getSession } from './shared/reducers/authentication';
 import Header from './shared/layout/header/header';
 import Footer from './shared/layout/footer/footer';
-import { hasAnyAuthority } from './shared/auth/private-route';
+import { hasAnyAuthority } from './shared/auth';
 import ErrorBoundary from './shared/error/error-boundary';
 import { AUTHORITIES } from './config/constants';
 import AppRoutes from './routes';

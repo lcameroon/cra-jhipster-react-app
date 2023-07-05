@@ -2,7 +2,6 @@ import React from 'react';
 
 import { NavItem, NavLink, NavbarBrand } from 'reactstrap';
 import { NavLink as Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { config } from '../../../config/constants';
 
@@ -23,7 +22,6 @@ export const Brand = (props) => (
 export const Home = (props) => (
   <NavItem>
     <NavLink tag={Link} to="/" className="d-flex align-items-center">
-      <FontAwesomeIcon icon="home" />
       <span>Home</span>
     </NavLink>
   </NavItem>

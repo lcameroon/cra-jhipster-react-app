@@ -1,8 +1,5 @@
 import * as toastify from 'react-toastify'; // synthetic default import doesn't work here due to mocking.
 import { createStore, applyMiddleware } from 'redux';
-import sinon from 'sinon';
-
-// import { notificationMiddleware } from './notification-middleware';
 
 describe('Notification Middleware', () => {
   let store;
@@ -151,23 +148,17 @@ describe('Notification Middleware', () => {
   };
 
   const makeStore = () => applyMiddleware()(createStore)(() => null);
-  // const makeStore = () => applyMiddleware(notificationMiddleware)(createStore)(() => null);
 
   beforeEach(() => {
     store = makeStore();
-    sinon.spy(toastify.toast, 'error');
-    sinon.spy(toastify.toast, 'success');
-  });
-
-  afterEach(() => {
-    (toastify.toast as any).error.restore();
-    (toastify.toast as any).success.restore();
+    jest.fn(toastify.toast.error);
+    jest.fn(toastify.toast.success);
   });
 
   it('should not trigger a toast message but should return action', () => {
     expect(store.dispatch(DEFAULT).payload).toEqual('foo');
-    expect((toastify.toast as any).error.called).toEqual(false);
-    expect((toastify.toast as any).success.called).toEqual(false);
+    expect((toastify.toast as any).error.called).toBeFalsy();
+    expect((toastify.toast as any).success.called).toBeFalsy();
   });
 
   it.skip('should trigger a success toast message for header alerts', () => {
@@ -214,8 +205,8 @@ describe('Notification Middleware', () => {
 
   it.skip('should not trigger an error toast message and return error for 401 response code', () => {
     expect(store.dispatch(LOGIN_REJECTED_ERROR).error.response.status).toEqual(401);
-    expect((toastify.toast as any).error.called).toEqual(false);
-    expect((toastify.toast as any).success.called).toEqual(false);
+    expect((toastify.toast as any).error.called).toBeFalsy();
+    expect((toastify.toast as any).success.called).toBeFalsy();
   });
 
   it.skip('should trigger an error toast incorrect password message and return error for 400 response code', () => {

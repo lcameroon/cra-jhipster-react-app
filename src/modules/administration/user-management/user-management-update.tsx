@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
 import { ValidatedField, ValidatedForm, isEmail } from 'react-jhipster';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAppDispatch, useAppSelector } from '../../../config/store';
 import { getUser, getRoles, updateUser, createUser, reset } from './user-management.reducer';
@@ -132,14 +131,11 @@ export const UserManagementUpdate = (props: RouteComponentProps<{ login: string 
                 ))}
               </ValidatedField>
               <Button tag={Link} to="/admin/user-management" replace color="info">
-                <FontAwesomeIcon icon="arrow-left" />
-                &nbsp;
-                <span className="d-none d-md-inline">Back</span>
+                Back
               </Button>
               &nbsp;
               <Button color="primary" type="submit" disabled={isInvalid || updating}>
-                <FontAwesomeIcon icon="save" />
-                &nbsp; Save
+                Save
               </Button>
             </ValidatedForm>
           )}

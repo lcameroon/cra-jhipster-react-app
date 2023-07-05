@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getEntity } from './bank-account.reducer';
 
@@ -37,12 +36,11 @@ export const BankAccountDetail = (props: RouteComponentProps<{ id: string }>) =>
           <dd>{bankAccountEntity.user ? bankAccountEntity.user.login : ''}</dd>
         </dl>
         <Button tag={Link} to="/bank-account" replace color="info" data-cy="entityDetailsBackButton">
-          <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline"> Back</span>
+          Back
         </Button>
         &nbsp;
         <Button tag={Link} to={`/bank-account/${bankAccountEntity.id}/edit`} replace color="primary">
-          <FontAwesomeIcon icon="pencil-alt" />
-          <span className="d-none d-md-inline"> Edit</span>
+          Edit
         </Button>
       </Col>
     </Row>
