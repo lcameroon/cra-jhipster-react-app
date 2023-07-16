@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Storage } from 'react-jhipster';
 
 import { AppThunk } from '../../../config/store';
-import { getSession } from '../../../shared/reducers/authentication';
+import { getSession } from '../../../shared/reducers/auth';
 import { serializeAxiosError } from '../../../shared/reducers/reducer.utils';
+import { Storage } from '../../../shared/util';
 
 const initialState = {
   loading: false,

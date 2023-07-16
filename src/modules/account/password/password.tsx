@@ -1,14 +1,15 @@
+import { IonButton, IonCard } from '@ionic/react';
 import React, { useState, useEffect } from 'react';
-import { ValidatedField, ValidatedForm } from 'react-jhipster';
-import { Row, Col, Button } from 'reactstrap';
 import { toast } from 'react-toastify';
 
 import { useAppDispatch, useAppSelector } from '../../../config/store';
-import { getSession } from '../../../shared/reducers/authentication';
-import PasswordStrengthBar from '../../../shared/layout/password/password-strength-bar';
+import { getSession } from '../../../shared/reducers/auth';
+import PasswordStrengthBar from '../../../shared/components/password/password-strength-bar';
 import { savePassword, reset } from './password.reducer';
+import { ValidatedField, ValidatedForm } from '../../../shared/components/form';
+import { CommonPage } from '../../../shared/components';
 
-export const PasswordPage = () => {
+export const PasswordPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const dispatch = useAppDispatch();
 
@@ -27,7 +28,7 @@ export const PasswordPage = () => {
 
   const updatePassword = (event) => setPassword(event.target.value);
 
-  const account = useAppSelector((state) => state.authentication.account);
+  const account = useAppSelector((state) => state.auth.account);
   const successMessage = useAppSelector((state) => state.password.successMessage);
   const errorMessage = useAppSelector((state) => state.password.errorMessage);
 
@@ -40,12 +41,10 @@ export const PasswordPage = () => {
   }, [successMessage, errorMessage]);
 
   return (
-    <div>
-      <Row className="justify-content-center">
-        <Col md="8">
-          <h2 id="password-title">
-            <span>Password for {account.email}</span>
-          </h2>
+    <CommonPage title="Password">
+      <div className="ion-content-max-width">
+        <h6 className="ion-no-margin ion-padding-bottom ion-padding-start opacity-50">Update your Password</h6>
+        <div className="ion-card ion-padding">
           <ValidatedForm id="password-form" onSubmit={handleValidSubmit}>
             <ValidatedField
               name="currentPassword"
@@ -81,13 +80,13 @@ export const PasswordPage = () => {
               }}
               data-cy="confirmPassword"
             />
-            <Button color="success" type="submit" data-cy="submit">
+            <IonButton color="primary" type="submit">
               Save
-            </Button>
+            </IonButton>
           </ValidatedForm>
-        </Col>
-      </Row>
-    </div>
+        </div>
+      </div>
+    </CommonPage>
   );
 };
 

@@ -3,16 +3,12 @@ import { Switch } from 'react-router-dom';
 
 import ErrorBoundaryRoute from '../shared/error/error-boundary-route';
 
-import BankAccount from './bank-account';
 import Label from './label';
 
 const Routes = ({ match }) => (
-  <>
-    <Switch>
-      <ErrorBoundaryRoute path={`${match.url}bank-account`} component={BankAccount} />
-      <ErrorBoundaryRoute path={`${match.url}label`} component={Label} />
-    </Switch>
-  </>
+  <Switch>
+    <ErrorBoundaryRoute path={`${match.url}label`} component={Label} />
+  </Switch>
 );
 
 export default Routes;

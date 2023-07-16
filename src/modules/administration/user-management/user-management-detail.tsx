@@ -1,72 +1,112 @@
-import React, { useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Row, Badge } from 'reactstrap';
-import { TextFormat } from 'react-jhipster';
+import { IonAlert, IonButton, IonItem, IonLabel, IonList } from '@ionic/react';
+import React, { useEffect, useState } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 
 import { APP_DATE_FORMAT } from '../../../config/constants';
 import { useAppDispatch, useAppSelector } from '../../../config/store';
-import { getUser } from './user-management.reducer';
+import { CommonPage, TextFormat } from '../../../shared/components';
+import { deleteUser, getUser } from './user-management.reducer';
 
-export const UserManagementDetail = (props: RouteComponentProps<{ login: string }>) => {
+export const UserManagementDetail: React.FC<RouteComponentProps<{ login: string }>> = ({ match, history }) => {
   const dispatch = useAppDispatch();
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
-    dispatch(getUser(props.match.params.login));
+    dispatch(getUser(match.params.login));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const user = useAppSelector((state) => state.userManagement.user);
 
+  const handleEdit = () => history.push(`/admin/user-management/${user.id}/edit`);
+
+  const handleBack = () => history.push('/admin/user-management');
+
+  const handleRemove = () => setShowAlert(true);
+
+  const confirmRemove = () => {
+    dispatch(deleteUser(`${user.id}`));
+    setShowAlert(false);
+    handleBack();
+  };
+
   return (
-    <div>
-      <h2>
-        User [<strong>{user.login}</strong>]
-      </h2>
-      <Row size="md">
-        <dl className="jh-entity-details">
-          <dt>Login</dt>
-          <dd>
-            <span>{user.login}</span>&nbsp;
-            {user.activated ? <Badge color="success">Activated</Badge> : <Badge color="danger">Deactivated</Badge>}
-          </dd>
-          <dt>First Name</dt>
-          <dd>{user.firstName}</dd>
-          <dt>Last Name</dt>
-          <dd>{user.lastName}</dd>
-          <dt>Email</dt>
-          <dd>{user.email}</dd>
-          <dt>Lang Key</dt>
-          <dd>{user?.langKey}</dd>
-          <dt>Created By</dt>
-          <dd>{user.createdBy}</dd>
-          <dt>Created Date</dt>
-          <dd>{user.createdDate ? <TextFormat value={user.createdDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid /> : null}</dd>
-          <dt>Last Modified By</dt>
-          <dd>{user.lastModifiedBy}</dd>
-          <dt>Last Modified Date</dt>
-          <dd>
-            {user.lastModifiedDate ? (
-              <TextFormat value={user.lastModifiedDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
-            ) : null}
-          </dd>
-          <dt>Profiles</dt>
-          <dd>
-            <ul className="list-unstyled">
-              {user.authorities
-                ? user.authorities.map((authority, i) => (
-                    <li key={`user-auth-${i}`}>
-                      <Badge color="info">{authority}</Badge>
-                    </li>
-                  ))
-                : null}
-            </ul>
-          </dd>
-        </dl>
-      </Row>
-      <Button tag={Link} to="/admin/user-management" replace color="info">
-        <span className="d-none d-md-inline">Back</span>
-      </Button>
-    </div>
+    <CommonPage title="User Details">
+      <div className="ion-content-max-width">
+        <div className="ion-card">
+          <IonList className="ion-no-padding">
+            <IonItem lines="none">
+              <IonLabel>
+                <strong>ID</strong>
+              </IonLabel>
+              <IonLabel>{user?.id}</IonLabel>
+            </IonItem>
+            <IonItem lines="none">
+              <IonLabel>
+                <strong>First Name</strong>
+              </IonLabel>
+              <IonLabel>{user.firstName}</IonLabel>
+            </IonItem>
+            <IonItem lines="none">
+              <IonLabel>
+                <strong>Last Name</strong>
+              </IonLabel>
+              <IonLabel>{user.lastName}</IonLabel>
+            </IonItem>
+            <IonItem lines="none">
+              <IonLabel>
+                <strong>E-mail</strong>
+              </IonLabel>
+              <IonLabel>{user.email}</IonLabel>
+            </IonItem>
+            <IonItem lines="none">
+              <IonLabel>
+                <strong>Role</strong>
+              </IonLabel>
+              <IonLabel>{user.authorities}</IonLabel>
+            </IonItem>
+            <IonItem lines="full">
+              <IonLabel>
+                <strong>Updated At</strong>
+              </IonLabel>
+              <IonLabel>
+                {user.updatedAt ? (
+                  <TextFormat value={user.updatedAt} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+                ) : null}
+              </IonLabel>
+            </IonItem>
+          </IonList>
+          <div className="ion-padding ion-text-end">
+            <IonButton onClick={handleBack} fill="outline" shape="round" className="ion-float-start">
+              Back
+            </IonButton>
+
+            <IonButton onClick={handleRemove} fill="outline" shape="round" color="danger">
+              Delete
+            </IonButton>
+            <IonButton onClick={handleEdit} shape="round" color="primary">
+              Edit
+            </IonButton>
+          </div>
+        </div>
+      </div>
+      <IonAlert
+        isOpen={showAlert}
+        header="Confirm!"
+        message="Are you sure you want to delete?"
+        backdropDismiss={false}
+        buttons={[
+          {
+            text: 'Cancel',
+            handler: () => setShowAlert(false),
+          },
+          {
+            text: 'OK',
+            handler: confirmRemove,
+          },
+        ]}
+      />
+    </CommonPage>
   );
 };
 

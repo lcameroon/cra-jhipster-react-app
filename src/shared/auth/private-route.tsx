@@ -10,9 +10,9 @@ interface IOwnProps extends RouteProps {
 }
 
 export const PrivateRouteComponent = ({ component: Component, hasAnyAuthorities = [], ...rest }: IOwnProps | any) => {
-  const isAuthenticated = useAppSelector((state) => state.authentication.isAuthenticated);
-  const sessionHasBeenFetched = useAppSelector((state) => state.authentication.sessionHasBeenFetched);
-  const account = useAppSelector((state) => state.authentication.account);
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const sessionHasBeenFetched = useAppSelector((state) => state.auth.sessionHasBeenFetched);
+  const account = useAppSelector((state) => state.auth.account);
   const isAuthorized = hasAnyAuthority(account.authorities, hasAnyAuthorities);
 
   const checkAuthorities = (props) =>
@@ -50,7 +50,7 @@ export const PrivateRouteComponent = ({ component: Component, hasAnyAuthorities 
 };
 
 /**
- * A route wrapped in an authentication check so that routing happens only when you are authenticated.
+ * A route wrapped in an auth check so that routing happens only when you are authenticated.
  * Accepts same props as React router Route.
  * The route also checks for authorization if hasAnyAuthorities is specified.
  */

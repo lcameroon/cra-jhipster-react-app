@@ -1,10 +1,10 @@
+import { IonAlert } from '@ionic/react';
 import React from 'react';
-import { Alert } from 'reactstrap';
 
 const PageNotFound: React.FC = () => {
   return (
-    <div>
-      <Alert color="danger">The page does not exist.</Alert>
+    <div className="ion-padding ion-text-center">
+      <IonAlert color="danger">The page does not exist.</IonAlert>
     </div>
   );
 };

@@ -1,8 +1,8 @@
-import axios from 'axios';
 import { createAsyncThunk, createSlice, isFulfilled, isPending, isRejected } from '@reduxjs/toolkit';
+import axios from 'axios';
 
+import { serializeAxiosError } from '../../../shared/reducers/reducer.utils';
 import { IUser, defaultValue } from '../../../shared/model/user.model';
-import { IQueryParams, serializeAxiosError } from '../../../shared/reducers/reducer.utils';
 
 const initialState = {
   loading: false,
@@ -15,66 +15,58 @@ const initialState = {
   totalItems: 0,
 };
 
+export type UserManagementState = Readonly<typeof initialState>;
+
 const apiUrl = 'api/users';
 const adminUrl = 'api/user';
 
 // Async Actions
 
-export const getUsers = createAsyncThunk('userManagement/fetch_users', async ({ page, size, sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}` : ''}`;
-  return axios.get<IUser[]>(requestUrl);
-});
-
-export const getUsersAsAdmin = createAsyncThunk('userManagement/fetch_users_as_admin', async ({ page, size, sort }: IQueryParams) => {
-  const requestUrl = `${adminUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}` : ''}`;
-  return axios.get<IUser[]>(requestUrl);
+export const getUsers = createAsyncThunk('userManagement/fetch_users', async () => {
+  return axios.get<IUser[]>(apiUrl);
 });
 
 export const getRoles = createAsyncThunk('userManagement/fetch_roles', async () => {
-  return axios.get<any[]>(`api/authorities`);
+  return axios.get<any[]>('api/authorities');
 });
 
 export const getUser = createAsyncThunk(
   'userManagement/fetch_user',
   async (id: string) => {
-    const requestUrl = `${adminUrl}/${id}`;
-    return axios.get<IUser>(requestUrl);
+    return axios.get<IUser>(`${apiUrl}/${id}`);
   },
-  { serializeError: serializeAxiosError }
+  { serializeError: serializeAxiosError },
 );
 
 export const createUser = createAsyncThunk(
   'userManagement/create_user',
-  async (user: IUser, thunkAPI) => {
+  async (user: IUser, { dispatch }) => {
     const result = await axios.post<IUser>(adminUrl, user);
-    thunkAPI.dispatch(getUsersAsAdmin({}));
+    await dispatch(getUsers());
     return result;
   },
-  { serializeError: serializeAxiosError }
+  { serializeError: serializeAxiosError },
 );
 
 export const updateUser = createAsyncThunk(
   'userManagement/update_user',
-  async (user: IUser, thunkAPI) => {
-    const result = await axios.put<IUser>(adminUrl, user);
-    thunkAPI.dispatch(getUsersAsAdmin({}));
+  async (user: IUser, { dispatch }) => {
+    const result = await axios.put<IUser>(`${apiUrl}/${user.id}`, user);
+    await dispatch(getUsers());
     return result;
   },
-  { serializeError: serializeAxiosError }
+  { serializeError: serializeAxiosError },
 );
 
 export const deleteUser = createAsyncThunk(
   'userManagement/delete_user',
-  async (id: string, thunkAPI) => {
-    const requestUrl = `${adminUrl}/${id}`;
-    const result = await axios.delete<IUser>(requestUrl);
-    thunkAPI.dispatch(getUsersAsAdmin({}));
+  async (id: string, { dispatch }) => {
+    const result = await axios.delete<IUser>(`${apiUrl}/${id}`);
+    await dispatch(getUsers());
     return result;
   },
-  { serializeError: serializeAxiosError }
+  { serializeError: serializeAxiosError },
 );
-
-export type UserManagementState = Readonly<typeof initialState>;
 
 export const UserManagementSlice = createSlice({
   name: 'userManagement',
@@ -82,6 +74,12 @@ export const UserManagementSlice = createSlice({
   reducers: {
     reset() {
       return initialState;
+    },
+    resetEntity(state) {
+      state.user = defaultValue;
+    },
+    setEntity(state, action) {
+      state.user = action.payload;
     },
   },
   extraReducers(builder) {
@@ -98,7 +96,7 @@ export const UserManagementSlice = createSlice({
         state.updateSuccess = true;
         state.user = defaultValue;
       })
-      .addMatcher(isFulfilled(getUsers, getUsersAsAdmin), (state, action) => {
+      .addMatcher(isFulfilled(getUsers), (state, action) => {
         state.loading = false;
         state.users = action.payload.data;
         state.totalItems = parseInt(action.payload.headers['x-total-count'], 10);
@@ -109,7 +107,7 @@ export const UserManagementSlice = createSlice({
         state.updateSuccess = true;
         state.user = action.payload.data;
       })
-      .addMatcher(isPending(getUsers, getUsersAsAdmin, getUser), (state) => {
+      .addMatcher(isPending(getUsers, getUser), (state) => {
         state.errorMessage = null;
         state.updateSuccess = false;
         state.loading = true;
@@ -119,7 +117,7 @@ export const UserManagementSlice = createSlice({
         state.updateSuccess = false;
         state.updating = true;
       })
-      .addMatcher(isRejected(getUsers, getUsersAsAdmin, getUser, getRoles, createUser, updateUser, deleteUser), (state, action) => {
+      .addMatcher(isRejected(getUsers, getUser, getRoles, createUser, updateUser, deleteUser), (state, action) => {
         state.loading = false;
         state.updating = false;
         state.updateSuccess = false;
@@ -128,7 +126,7 @@ export const UserManagementSlice = createSlice({
   },
 });
 
-export const { reset } = UserManagementSlice.actions;
+export const { reset, resetEntity, setEntity } = UserManagementSlice.actions;
 
 // Reducer
 export default UserManagementSlice.reducer;

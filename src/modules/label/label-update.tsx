@@ -1,41 +1,36 @@
+import { IonButton } from '@ionic/react';
 import React, { useState, useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Row, Col } from 'reactstrap';
-import { ValidatedField, ValidatedForm } from 'react-jhipster';
+import { RouteComponentProps } from 'react-router-dom';
 
 import { getEntity, updateEntity, createEntity, reset } from './label.reducer';
 import { useAppDispatch, useAppSelector } from '../../config/store';
+import { CommonPage, Loading, ValidatedField, ValidatedForm } from '../../shared/components';
 
-export const LabelUpdate = (props: RouteComponentProps<{ id: string }>) => {
+export const LabelUpdate: React.FC<RouteComponentProps<{ id: string }>> = ({ match, history }) => {
   const dispatch = useAppDispatch();
 
-  const [isNew] = useState(!props.match.params || !props.match.params.id);
+  const [isNew] = useState(!match.params || !match.params.id);
 
   const labelEntity = useAppSelector((state) => state.label.entity);
   const loading = useAppSelector((state) => state.label.loading);
   const updating = useAppSelector((state) => state.label.updating);
   const updateSuccess = useAppSelector((state) => state.label.updateSuccess);
 
-  const handleClose = () => {
-    props.history.push('/label');
-  };
+  const handleClose = () => history.push('/label');
 
   useEffect(() => {
     if (isNew) {
       dispatch(reset());
     } else {
-      dispatch(getEntity(props.match.params.id));
+      dispatch(getEntity(match.params.id));
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); // eslint-disable-line
 
   useEffect(() => {
     if (updateSuccess) {
       handleClose();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [updateSuccess]);
+  }, [updateSuccess]); // eslint-disable-line
 
   const saveEntity = (values) => {
     const entity = {
@@ -50,52 +45,40 @@ export const LabelUpdate = (props: RouteComponentProps<{ id: string }>) => {
     }
   };
 
-  const defaultValues = () =>
-    isNew
-      ? {}
-      : {
-          ...labelEntity,
-        };
+  const defaultValues = () => (isNew ? {} : { ...labelEntity });
 
   return (
-    <div>
-      <Row className="justify-content-center">
-        <Col md="8">
-          <h2 id="jhipsterSampleApplicationReactApp.label.home.createOrEditLabel" data-cy="LabelCreateUpdateHeading">
-            Create or edit a Label
-          </h2>
-        </Col>
-      </Row>
-      <Row className="justify-content-center">
-        <Col md="8">
+    <CommonPage title={`${isNew ? 'Create' : 'Edit'} Label`}>
+      <div className="ion-content-max-width">
+        <div className="ion-card ion-padding">
           {loading ? (
-            <p>Loading...</p>
+            <Loading />
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
-              {!isNew ? <ValidatedField name="id" required readOnly id="label-id" label="ID" validate={{ required: true }} /> : null}
+              {!isNew ? <ValidatedField disabled={loading} name="id" readOnly label="ID" /> : null}
               <ValidatedField
                 label="Label"
                 id="label-label"
                 name="label"
-                data-cy="label"
                 type="text"
+                disabled={loading}
                 validate={{
                   required: { value: true, message: 'entity.validation.required' },
                   minLength: { value: 3, message: 'entity.validation.minlength' },
                 }}
               />
-              <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/label" replace color="info">
+              <IonButton onClick={() => history.push('/label')} fill="outline">
                 Back
-              </Button>
+              </IonButton>
               &nbsp;
-              <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
+              <IonButton color="primary" type="submit" disabled={updating}>
                 Save
-              </Button>
+              </IonButton>
             </ValidatedForm>
           )}
-        </Col>
-      </Row>
-    </div>
+        </div>
+      </div>
+    </CommonPage>
   );
 };
 

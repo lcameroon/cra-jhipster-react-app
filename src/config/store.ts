@@ -5,16 +5,8 @@ import reducer from '../shared/reducers';
 import errorMiddleware from './error-middleware';
 import notificationMiddleware from './notification-middleware';
 import loggerMiddleware from './logger-middleware';
-import { loadingBarMiddleware } from 'react-redux-loading-bar';
 
-const defaultMiddlewares = [
-  errorMiddleware,
-  notificationMiddleware,
-  loggerMiddleware,
-  loadingBarMiddleware({
-    promiseTypeSuffixes: ['pending', 'fulfilled', 'rejected'],
-  }),
-];
+const defaultMiddlewares = [errorMiddleware, notificationMiddleware, loggerMiddleware];
 
 const store = configureStore({
   reducer,

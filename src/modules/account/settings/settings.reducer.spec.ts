@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import axios from 'axios';
 
 import account, { updateAccount, saveAccountSettings, reset } from './settings.reducer';
-import { getAccount } from '../../../shared/reducers/authentication';
+import { getAccount } from '../../../shared/reducers/auth';
 
 describe('Settings reducer tests', () => {
   describe('Common tests', () => {
@@ -67,7 +67,7 @@ describe('Settings reducer tests', () => {
     const resolvedObject = { value: 'whatever' };
     beforeEach(() => {
       const mockStore = configureStore([thunk]);
-      store = mockStore({ authentication: { account: { langKey: 'en' } } });
+      store = mockStore({ auth: { account: { langKey: 'en' } } });
       axios.get = jest.fn().mockResolvedValue(resolvedObject);
       axios.post = jest.fn().mockResolvedValue(resolvedObject);
     });

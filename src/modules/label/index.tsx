@@ -6,7 +6,6 @@ import ErrorBoundaryRoute from '../../shared/error/error-boundary-route';
 import Label from './label';
 import LabelDetail from './label-detail';
 import LabelUpdate from './label-update';
-import LabelDeleteDialog from './label-delete-dialog';
 
 const Routes = ({ match }) => (
   <>
@@ -16,7 +15,6 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute exact path={`${match.url}/:id`} component={LabelDetail} />
       <ErrorBoundaryRoute path={match.url} component={Label} />
     </Switch>
-    <ErrorBoundaryRoute exact path={`${match.url}/:id/delete`} component={LabelDeleteDialog} />
   </>
 );
 

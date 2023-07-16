@@ -1,0 +1,3 @@
+ion-input[invalid="true"] .input-bottom.sc-ion-input-md .error-text.sc-ion-input-md {
+    display: block;
+}

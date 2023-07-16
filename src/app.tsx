@@ -1,20 +1,36 @@
 import 'react-toastify/dist/ReactToastify.css';
+/* Core CSS required for Ionic components to work properly */
+import '@ionic/react/css/core.css';
+/* Basic CSS for apps built with Ionic */
+import '@ionic/react/css/normalize.css';
+import '@ionic/react/css/structure.css';
+import '@ionic/react/css/typography.css';
+/* Optional CSS utils that can be commented out */
+import '@ionic/react/css/padding.css';
+import '@ionic/react/css/float-elements.css';
+import '@ionic/react/css/text-alignment.css';
+import '@ionic/react/css/text-transformation.css';
+import '@ionic/react/css/flex-utils.css';
+import '@ionic/react/css/display.css';
+/* Theme variables */
 import './app.scss';
 import './config/dayjs';
 
+import { IonApp, IonRouterOutlet, IonSplitPane, setupIonicReact } from '@ionic/react';
+import { IonReactRouter } from '@ionic/react-router';
 import React, { useEffect } from 'react';
-import { Card } from 'reactstrap';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { Slide, ToastContainer, toast } from 'react-toastify';
 
 import { useAppDispatch, useAppSelector } from './config/store';
-import { getSession } from './shared/reducers/authentication';
-import Header from './shared/layout/header/header';
-import Footer from './shared/layout/footer/footer';
-import { hasAnyAuthority } from './shared/auth';
+import { getSession } from './shared/reducers/auth';
 import ErrorBoundary from './shared/error/error-boundary';
-import { AUTHORITIES } from './config/constants';
+import { AppMenu } from './shared/layout/menus';
 import AppRoutes from './routes';
+import { BrowserRouter } from 'react-router-dom';
+
+setupIonicReact({ rippleEffect: false });
+
+const Router = BrowserRouter as any; // Workaroud for React 18
 
 export const App: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -23,37 +39,35 @@ export const App: React.FC = () => {
     dispatch(getSession());
   }, [dispatch]);
 
-  const isAuthenticated = useAppSelector((state) => state.authentication.isAuthenticated);
-  const isAdmin = useAppSelector((state) => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ADMIN]));
-  const ribbonEnv = useAppSelector((state) => state.applicationProfile.ribbonEnv);
-  const isInProduction = useAppSelector((state) => state.applicationProfile.inProduction);
-  const isOpenAPIEnabled = useAppSelector((state) => state.applicationProfile.isOpenAPIEnabled);
+  const darkMode = useAppSelector((state) => state.appShared.darkMode);
 
-  const paddingTop = '60px';
+  useEffect(() => {
+    document.body.className = `${darkMode ? 'dark-theme' : ''}`;
+  }, [darkMode]);
+
   return (
-    <Router>
-      <div className="app-container" style={{ paddingTop }}>
-        <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
-        <ErrorBoundary>
-          <Header
-            isAuthenticated={isAuthenticated}
-            isAdmin={isAdmin}
-            currentLocale="en"
-            ribbonEnv={ribbonEnv}
-            isInProduction={isInProduction}
-            isOpenAPIEnabled={isOpenAPIEnabled}
-          />
-        </ErrorBoundary>
-        <div className="container-fluid view-container" id="app-view-container">
-          <Card className="jh-card">
-            <ErrorBoundary>
-              <AppRoutes />
-            </ErrorBoundary>
-          </Card>
-          <Footer />
-        </div>
-      </div>
-    </Router>
+    <>
+      <ToastContainer
+        hideProgressBar
+        position={toast.POSITION.TOP_CENTER}
+        transition={Slide}
+        className="toastify-container"
+        toastClassName="toastify-toast"
+        theme="colored"
+      />
+      <IonApp>
+        <Router>
+          <IonSplitPane contentId="main">
+            <AppMenu />
+            <IonRouterOutlet id="main">
+              <ErrorBoundary>
+                <AppRoutes />
+              </ErrorBoundary>
+            </IonRouterOutlet>
+          </IonSplitPane>
+        </Router>
+      </IonApp>
+    </>
   );
 };
 

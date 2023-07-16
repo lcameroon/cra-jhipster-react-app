@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Table } from 'reactstrap';
+import { RouteComponentProps } from 'react-router-dom';
+import { refreshOutline } from 'ionicons/icons';
 
 import { getEntities } from './label.reducer';
 import { useAppDispatch, useAppSelector } from '../../config/store';
+import { IonButton, IonIcon, IonItem, IonLabel, IonList } from '@ionic/react';
+import { CommonPage, Loading, NoItemsFound } from '../../shared/components';
 
-export const Label = (props: RouteComponentProps<{ url: string }>) => {
+export const Label: React.FC<RouteComponentProps<{ url: string }>> = ({ match, history }) => {
   const dispatch = useAppDispatch();
 
   const labelList = useAppSelector((state) => state.label.entities);
@@ -13,69 +15,49 @@ export const Label = (props: RouteComponentProps<{ url: string }>) => {
 
   useEffect(() => {
     dispatch(getEntities({}));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); // eslint-disable-line
 
   const handleSyncList = () => {
     dispatch(getEntities({}));
   };
 
-  const { match } = props;
-
   return (
-    <div>
-      <h2 id="label-heading" data-cy="LabelHeading">
-        Labels
-        <div className="d-flex justify-content-end">
-          <Button className="mr-2" color="info" onClick={handleSyncList} disabled={loading}>
-            Refresh List
-          </Button>
-          <Link to={`${match.url}/new`} className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
+    <CommonPage title="Labels">
+      <div className="ion-content-max-width">
+        <div className="d-block ion-text-end ion-padding-end">
+          <IonButton color="primary" onClick={handleSyncList} disabled={loading} fill="outline" shape="round">
+            <IonIcon slot="icon-only" icon={refreshOutline} />
+          </IonButton>
+          <IonButton onClick={() => history.push(`${match.url}/new`)} color="primary" shape="round">
             Create Label
-          </Link>
+          </IonButton>
         </div>
-      </h2>
-      <div className="table-responsive">
-        {labelList && labelList.length > 0 ? (
-          <Table responsive>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Label</th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {labelList.map((label, i) => (
-                <tr key={`entity-${i}`} data-cy="entityTable">
-                  <td>
-                    <Button tag={Link} to={`${match.url}/${label.id}`} color="link" size="sm">
-                      {label.id}
-                    </Button>
-                  </td>
-                  <td>{label.label}</td>
-                  <td className="text-right">
-                    <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`${match.url}/${label.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        View
-                      </Button>
-                      <Button tag={Link} to={`${match.url}/${label.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
-                        Edit
-                      </Button>
-                      <Button tag={Link} to={`${match.url}/${label.id}/delete`} color="danger" size="sm" data-cy="entityDeleteButton">
-                        Delete
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        ) : (
-          !loading && <div className="alert alert-warning">No Labels found</div>
-        )}
+        <h6 style={{ marginTop: -42 }} className="ion-no-margin ion-padding opacity-50 w-50">
+          List of Labels
+        </h6>
+        <div className="ion-card">
+          {loading && <Loading />}
+          <IonList>
+            {labelList.map((item, i) => (
+              <IonItem
+                key={item.id}
+                button
+                detail
+                disabled={loading}
+                onClick={() => history.push(`${match.url}/${item.id}`)}
+                lines={labelList.length - 1 === i ? 'none' : 'full'}
+              >
+                <IonLabel>
+                  <h2>{item.label}</h2>
+                  <p>{item.id}</p>
+                </IonLabel>
+              </IonItem>
+            ))}
+            {!loading && !labelList.length && <NoItemsFound />}
+          </IonList>
+        </div>
       </div>
-    </div>
+    </CommonPage>
   );
 };
 

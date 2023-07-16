@@ -1,26 +1,24 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../config/store';
-import { logout } from '../../shared/reducers/authentication';
+import { useAppDispatch } from '../../config/store';
+import { logout } from '../../shared/reducers/auth';
+import { RouteComponentProps } from 'react-router';
+import { Loading } from '../../shared/components';
 
-export const Logout = () => {
-  const logoutUrl = useAppSelector((state) => state.authentication.logoutUrl);
-  const idToken = useAppSelector((state) => state.authentication.idToken);
+export const Logout: React.FC<RouteComponentProps> = ({ history }) => {
   const dispatch = useAppDispatch();
 
-  useLayoutEffect(() => {
-    dispatch(logout());
-    if (logoutUrl) {
-      // if Keycloak, logoutUrl has protocol/openid-connect in it
-      window.location.href = (logoutUrl as any).includes('/protocol')
-        ? logoutUrl + '?redirect_uri=' + window.location.origin
-        : logoutUrl + '?id_token_hint=' + idToken + '&post_logout_redirect_uri=' + window.location.origin;
-    }
-  });
+  useEffect(() => {
+    setTimeout(async () => {
+      await dispatch(logout());
+      history.push('/');
+    }, 500);
+  }, [dispatch, history]);
 
   return (
-    <div className="p-5">
-      <h4>Logged out successfully!</h4>
+    <div className="ion-padding ion-margin ion-text-center">
+      <Loading />
+      <h2>Logged out successfully!</h2>
     </div>
   );
 };

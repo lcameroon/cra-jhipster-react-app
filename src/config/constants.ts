@@ -14,7 +14,7 @@ export const messages = {
   DATA_ERROR_ALERT: 'Internal Error',
 };
 
-export const AUTH_TOKEN_KEY = 'jhi-authenticationToken';
+export const AUTH_TOKEN_KEY = 'jhi-authToken';
 
 export const APP_DATE_FORMAT = 'DD/MM/YY HH:mm';
 export const APP_TIMESTAMP_FORMAT = 'DD/MM/YY HH:mm:ss';

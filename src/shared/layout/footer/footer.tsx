@@ -1,15 +1,9 @@
-import './footer.scss';
-
 import React from 'react';
-import { Col, Row } from 'reactstrap';
+import { config } from '../../../config/constants';
 
-const Footer: React.FC = (props) => (
-  <div className="footer page-content">
-    <Row>
-      <Col md="12">
-        <p>Your footer</p>
-      </Col>
-    </Row>
+const Footer: React.FC = () => (
+  <div className="footer ion-margin-top ion-padding ion-text-center border-top">
+    {new Date().getFullYear()} &copy; {config.APP_NAME}
   </div>
 );
 

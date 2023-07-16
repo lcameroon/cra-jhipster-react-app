@@ -1,312 +1,248 @@
-// Override Boostrap variables
-// Import Bootstrap source files from node_modules
-@import 'node_modules/bootstrap/scss/bootstrap';
-body {
-  background: #fafafa;
-  margin: 0;
+:root {
+  --ion-color-primary: #7269ef;
+  --ion-color-primary-rgb: 114, 105, 239;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #645cd2;
+  --ion-color-primary-tint: #8078f1;
+
+  --ion-color-secondary: #484554;
+  --ion-color-secondary-rgb: 72, 69, 84;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #3f3d4a;
+  --ion-color-secondary-tint: #5a5865;
+
+  --ion-color-tertiary: #b4a9df;
+  --ion-color-tertiary-rgb: 180, 169, 223;
+  --ion-color-tertiary-contrast: #000000;
+  --ion-color-tertiary-contrast-rgb: 0, 0, 0;
+  --ion-color-tertiary-shade: #9e95c4;
+  --ion-color-tertiary-tint: #bcb2e2;
+
+  --ion-color-success: #48bea2;
+  --ion-color-success-rgb: 72, 190, 162;
+  --ion-color-success-contrast: #000000;
+  --ion-color-success-contrast-rgb: 0, 0, 0;
+  --ion-color-success-shade: #3fa78f;
+  --ion-color-success-tint: #5ac5ab;
+
+  --ion-color-warning: #ffc409;
+  --ion-color-warning-rgb: 255, 196, 9;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #e0ac08;
+  --ion-color-warning-tint: #ffca22;
+
+  --ion-color-danger: #e7363d;
+  --ion-color-danger-rgb: 231, 54, 61;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #cb3036;
+  --ion-color-danger-tint: #e94a50;
+
+  --ion-color-medium: #999;
+  --ion-color-medium-rgb: 153, 153, 153;
+  --ion-color-medium-contrast: #000000;
+  --ion-color-medium-contrast-rgb: 0, 0, 0;
+  --ion-color-medium-shade: #878787;
+  --ion-color-medium-tint: #a3a3a3;
+
+  --ion-color-light: #f3f3f3;
+  --ion-color-light-rgb: 243, 243, 243;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #d6d6d6;
+  --ion-color-light-tint: #f4f4f4;
 }
 
-a {
-  color: #533f03;
-  font-weight: bold;
+body.dark {
+  --ion-color-primary: #9ea7b9;
+  --ion-color-primary-rgb: 158, 167, 185;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #8b93a3;
+  --ion-color-primary-tint: #a8b0c0;
+
+  --ion-color-secondary: #00be85;
+  --ion-color-secondary-rgb: 0, 190, 133;
+  --ion-color-secondary-contrast: #000;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #00a775;
+  --ion-color-secondary-tint: #1ac591;
+
+  --ion-color-tertiary: #6a64ff;
+  --ion-color-tertiary-rgb: 106, 100, 255;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #5d58e0;
+  --ion-color-tertiary-tint: #7974ff;
+
+  --ion-color-success: #2fdf75;
+  --ion-color-success-rgb: 47, 223, 117;
+  --ion-color-success-contrast: #000000;
+  --ion-color-success-contrast-rgb: 0, 0, 0;
+  --ion-color-success-shade: #29c467;
+  --ion-color-success-tint: #44e283;
+
+  --ion-color-warning: #ffd534;
+  --ion-color-warning-rgb: 255, 213, 52;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #e0bb2e;
+  --ion-color-warning-tint: #ffd948;
+
+  --ion-color-danger: #ff4961;
+  --ion-color-danger-rgb: 255, 73, 97;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #e04055;
+  --ion-color-danger-tint: #ff5b71;
+
+  --ion-color-dark: #f4f5f8;
+  --ion-color-dark-rgb: 244, 245, 248;
+  --ion-color-dark-contrast: #000000;
+  --ion-color-dark-contrast-rgb: 0, 0, 0;
+  --ion-color-dark-shade: #d7d8da;
+  --ion-color-dark-tint: #f5f6f9;
+
+  --ion-color-medium: #989aa2;
+  --ion-color-medium-rgb: 152, 154, 162;
+  --ion-color-medium-contrast: #000000;
+  --ion-color-medium-contrast-rgb: 0, 0, 0;
+  --ion-color-medium-shade: #86888f;
+  --ion-color-medium-tint: #a2a4ab;
+
+  --ion-color-light: #222428;
+  --ion-color-light-rgb: 34, 36, 40;
+  --ion-color-light-contrast: #ffffff;
+  --ion-color-light-contrast-rgb: 255, 255, 255;
+  --ion-color-light-shade: #1e2023;
+  --ion-color-light-tint: #383a3e;
 }
 
-* {
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  &:after,
-  &::before {
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
+/*
+   * iOS Dark Theme
+   * -------------------------------------------
+   */
+
+.ios body.dark {
+  --ion-background-color: #000000;
+  --ion-background-color-rgb: 0, 0, 0;
+
+  --ion-text-color: #ffffff;
+  --ion-text-color-rgb: 255, 255, 255;
+
+  --ion-color-step-50: #0d0d0d;
+  --ion-color-step-100: #1a1a1a;
+  --ion-color-step-150: #262626;
+  --ion-color-step-200: #333333;
+  --ion-color-step-250: #404040;
+  --ion-color-step-300: #4d4d4d;
+  --ion-color-step-350: #595959;
+  --ion-color-step-400: #666666;
+  --ion-color-step-450: #737373;
+  --ion-color-step-500: #808080;
+  --ion-color-step-550: #8c8c8c;
+  --ion-color-step-600: #999999;
+  --ion-color-step-650: #a6a6a6;
+  --ion-color-step-700: #b3b3b3;
+  --ion-color-step-750: #bfbfbf;
+  --ion-color-step-800: #cccccc;
+  --ion-color-step-850: #d9d9d9;
+  --ion-color-step-900: #e6e6e6;
+  --ion-color-step-950: #f2f2f2;
+
+  --ion-item-background: #000000;
+
+  --ion-card-background: #1c1c1d;
 }
 
-.app-container {
-  box-sizing: border-box;
-  .view-container {
-    width: 100%;
-    height: calc(100% - 40px);
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 1rem;
-    .card {
-      padding: 1rem;
-    }
-    .view-routes {
-      height: 100%;
-      > div {
-        height: 100%;
-      }
-    }
-  }
+.ios ion-modal {
+  --ion-background-color: var(--ion-color-step-100);
+  --ion-toolbar-background: var(--ion-color-step-150);
+  --ion-toolbar-border-color: var(--ion-color-step-250);
 }
 
-.fullscreen {
-  position: fixed;
-  top: 100px;
-  left: 0px;
-  width: 99% !important;
-  height: calc(100vh - 110px) !important;
-  margin: 5px;
-  z-index: 1000;
-  padding: 5px 25px 50px 25px !important;
+/*
+   * Material Design Dark Theme
+   * -------------------------------------------
+   */
+
+body.dark-theme {
+  --ion-background-color: #121212;
+  --ion-background-color-rgb: 18, 18, 18;
+
+  --ion-text-color: #ffffff;
+  --ion-text-color-rgb: 255, 255, 255;
+
+  --ion-border-color: #222222;
+
+  --ion-color-step-50: #1e1e1e;
+  --ion-color-step-100: #2a2a2a;
+  --ion-color-step-150: #363636;
+  --ion-color-step-200: #414141;
+  --ion-color-step-250: #4d4d4d;
+  --ion-color-step-300: #595959;
+  --ion-color-step-350: #656565;
+  --ion-color-step-400: #717171;
+  --ion-color-step-450: #7d7d7d;
+  --ion-color-step-500: #898989;
+  --ion-color-step-550: #949494;
+  --ion-color-step-600: #a0a0a0;
+  --ion-color-step-650: #acacac;
+  --ion-color-step-700: #b8b8b8;
+  --ion-color-step-750: #c4c4c4;
+  --ion-color-step-800: #d0d0d0;
+  --ion-color-step-850: #dbdbdb;
+  --ion-color-step-900: #e7e7e7;
+  --ion-color-step-950: #f3f3f3;
+
+  --ion-item-background: #1e1e1e;
+
+  --ion-toolbar-background: #1f1f1f;
+
+  --ion-tab-bar-background: #1f1f1f;
+
+  --ion-card-background: #1e1e1e;
+}
+// SideBar
+ion-split-pane {
+  --side-max-width: 300px;
 }
 
-/* ==========================================================================
-Browser Upgrade Prompt
-========================================================================== */
-
-.browserupgrade {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+.ion-content-max-width {
+  position: relative;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.ion-card {
+  margin-inline: 16px;
+  margin-bottom: 24px;
+  border-radius: 8px;
+  transition: transform 500ms cubic-bezier(0.12, 0.72, 0.29, 1) 0s, -webkit-transform 500ms cubic-bezier(0.12, 0.72, 0.29, 1) 0s;
+  font-size: 14px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 16px;
+}
+body.dark-theme .ion-card {
+  background: var(--ion-item-background);
 }
 
-/* ==========================================================================
-Custom button styles
-========================================================================== */
-
-.icon-button > .btn {
-  background-color: transparent;
-  border-color: transparent;
-  padding: 0.5rem;
-  line-height: 1rem;
-  &:hover {
-    background-color: transparent;
-    border-color: transparent;
-  }
-  &:focus {
-    -webkit-box-shadow: none;
-    box-shadow: none;
-  }
-}
-
-/* ==========================================================================
-Generic styles
-========================================================================== */
-
-/* Temporary workaround for availity-reactstrap-validation */
-.invalid-feedback {
-  display: inline;
-}
-
-/* other generic styles */
-
-.title {
-  font-size: 1.25em;
-  margin: 1px 10px 1px 10px;
-}
-
-.description {
-  font-size: 0.9em;
-  margin: 1px 10px 1px 10px;
-}
-
-.shadow {
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
-  border-radius: 2px;
-}
-
-.error {
-  color: white;
-  background-color: red;
-}
-
-.break {
-  white-space: normal;
-  word-break: break-all;
-}
-
-.break-word {
-  white-space: normal;
-  word-break: keep-all;
-}
-
-.preserve-space {
-  white-space: pre-wrap;
-}
-
-/* padding helpers */
-
-@mixin pad($size, $side) {
-  @if $size== '' {
-    @if $side== '' {
-      .pad {
-        padding: 10px !important;
-      }
-    } @else {
-      .pad {
-        padding-#{$side}: 10px !important;
-      }
-    }
-  } @else {
-    @if $side== '' {
-      .pad-#{$size} {
-        padding: #{$size}px !important;
-      }
-    } @else {
-      .pad-#{$side}-#{$size} {
-        padding-#{$side}: #{$size}px !important;
-      }
-    }
-  }
-}
-
-@include pad('', '');
-@include pad('2', '');
-@include pad('3', '');
-@include pad('5', '');
-@include pad('10', '');
-@include pad('20', '');
-@include pad('25', '');
-@include pad('30', '');
-@include pad('50', '');
-@include pad('75', '');
-@include pad('100', '');
-@include pad('4', 'top');
-@include pad('5', 'top');
-@include pad('10', 'top');
-@include pad('20', 'top');
-@include pad('25', 'top');
-@include pad('30', 'top');
-@include pad('50', 'top');
-@include pad('75', 'top');
-@include pad('100', 'top');
-@include pad('4', 'bottom');
-@include pad('5', 'bottom');
-@include pad('10', 'bottom');
-@include pad('20', 'bottom');
-@include pad('25', 'bottom');
-@include pad('30', 'bottom');
-@include pad('50', 'bottom');
-@include pad('75', 'bottom');
-@include pad('100', 'bottom');
-@include pad('5', 'right');
-@include pad('10', 'right');
-@include pad('20', 'right');
-@include pad('25', 'right');
-@include pad('30', 'right');
-@include pad('50', 'right');
-@include pad('75', 'right');
-@include pad('100', 'right');
-@include pad('5', 'left');
-@include pad('10', 'left');
-@include pad('20', 'left');
-@include pad('25', 'left');
-@include pad('30', 'left');
-@include pad('50', 'left');
-@include pad('75', 'left');
-@include pad('100', 'left');
-
-@mixin no-padding($side) {
-  @if $side== 'all' {
-    .no-padding {
-      padding: 0 !important;
-    }
-  } @else {
-    .no-padding-#{$side} {
-      padding-#{$side}: 0 !important;
-    }
-  }
-}
-
-@include no-padding('left');
-@include no-padding('right');
-@include no-padding('top');
-@include no-padding('bottom');
-@include no-padding('all');
-
-/* end of padding helpers */
-
-.no-margin {
-  margin: 0px;
-}
-@mixin voffset($size) {
-  @if $size== '' {
-    .voffset {
-      margin-top: 2px !important;
-    }
-  } @else {
-    .voffset-#{$size} {
-      margin-top: #{$size}px !important;
-    }
-  }
-}
-
-@include voffset('');
-@include voffset('5');
-@include voffset('10');
-@include voffset('15');
-@include voffset('30');
-@include voffset('40');
-@include voffset('60');
-@include voffset('80');
-@include voffset('100');
-@include voffset('150');
-
-.readonly {
-  background-color: #eee;
-  opacity: 1;
-}
-
-/* ==========================================================================
-make sure browsers use the pointer cursor for anchors, even with no href
-========================================================================== */
-
-a:hover {
-  cursor: pointer;
-}
-
-.hand {
-  cursor: pointer;
-}
-
-button.anchor-btn {
-  background: none;
-  border: none;
-  padding: 0;
-  align-items: initial;
-  text-align: initial;
-  width: 100%;
-}
-
-a.anchor-btn:hover {
-  text-decoration: none;
-}
-
-/* ==========================================================================
-Metrics and Health styles
-========================================================================== */
-
-#threadDump .popover,
-#healthCheck .popover {
-  top: inherit;
-  display: block;
-  font-size: 10px;
-  max-width: 1024px;
-}
-
-.thread-dump-modal-lock {
-  max-width: 450px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-#healthCheck .popover {
-  margin-left: -50px;
-}
-
-.health-details {
-  min-width: 400px;
-}
-
-/* bootstrap 3 input-group 100% width
-http://stackoverflow.com/questions/23436430/bootstrap-3-input-group-100-width */
-
-.width-min {
-  width: 1% !important;
-}
-
-/* jhipster-needle-scss-add-main JHipster will add new css style */
+// width
+.w-100 { width: 100%; }
+.w-90 { width: 90%; }
+.w-80 { width: 80%; }
+.w-70 { width: 70%; }
+.w-66 { width: 66%; }
+.w-60 { width: 60%; }
+.w-50 { width: 50%; }
+.w-40 { width: 40%; }
+.w-33 { width: 33%; }
+.w-30 { width: 30%; }
+.w-20 { width: 20%; }
+.w-10 { width: 10%; }
+// opacity
+.opacity-70 { opacity: 0.7; }
+.opacity-50 { opacity: 0.5; }
+.opacity-30 { opacity: 0.3; }

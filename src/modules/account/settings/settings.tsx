@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
-import { Button, Col, Row } from 'reactstrap';
-import { ValidatedField, ValidatedForm, isEmail } from 'react-jhipster';
 import { toast } from 'react-toastify';
 
 import { useAppDispatch, useAppSelector } from '../../../config/store';
-import { getSession } from '../../../shared/reducers/authentication';
+import { getSession } from '../../../shared/reducers/auth';
 import { saveAccountSettings, reset } from './settings.reducer';
+import { ValidatedField, ValidatedForm, isEmail } from '../../../shared/components/form';
+import { CommonPage } from '../../../shared/components';
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/react';
 
-export const SettingsPage = () => {
+export const SettingsPage: React.FC = () => {
   const dispatch = useAppDispatch();
-  const account = useAppSelector((state) => state.authentication.account);
+  const account = useAppSelector((state) => state.auth.account);
   const successMessage = useAppSelector((state) => state.settings.successMessage);
 
   useEffect(() => {
@@ -32,15 +33,18 @@ export const SettingsPage = () => {
       saveAccountSettings({
         ...account,
         ...values,
-      })
+      }),
     );
   };
 
   return (
-    <div>
-      <Row className="justify-content-center">
-        <Col md="8">
-          <h2 id="settings-title">User settings for {account.email}</h2>
+    <CommonPage title="Settings">
+      <div className="ion-content-max-width">
+        <h6 className="ion-no-margin ion-padding-bottom ion-padding-start opacity-50">
+          User settings for {account.email}
+        </h6>
+
+        <div className="ion-card ion-padding">
           <ValidatedForm id="settings-form" onSubmit={handleValidSubmit} defaultValues={account}>
             <ValidatedField
               name="firstName"
@@ -51,7 +55,6 @@ export const SettingsPage = () => {
                 minLength: { value: 1, message: 'validate.firstname.minlength' },
                 maxLength: { value: 50, message: 'validate.firstname.maxlength' },
               }}
-              data-cy="firstname"
             />
             <ValidatedField
               name="lastName"
@@ -62,28 +65,27 @@ export const SettingsPage = () => {
                 minLength: { value: 1, message: 'validate.lastname.minlength' },
                 maxLength: { value: 50, message: 'validate.lastname.maxlength' },
               }}
-              data-cy="lastname"
             />
             <ValidatedField
               name="email"
               label="E-mail"
               type="email"
+              required
               validate={{
                 required: { value: true, message: 'email.required' },
                 minLength: { value: 5, message: 'email.minlength' },
                 maxLength: { value: 254, message: 'email.maxlength' },
                 validate: (v) => isEmail(v) || 'email.invalid',
               }}
-              data-cy="email"
             />
-            <ValidatedField id="langKey" name="langKey" label="Language" data-cy="langKey" readOnly />
-            <Button color="primary" type="submit" data-cy="submit">
+            <ValidatedField id="langKey" name="langKey" label="Language" readOnly />
+            <IonButton color="primary" type="submit">
               Save
-            </Button>
+            </IonButton>
           </ValidatedForm>
-        </Col>
-      </Row>
-    </div>
+        </div>
+      </div>
+    </CommonPage>
   );
 };
 

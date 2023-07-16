@@ -1,10 +1,10 @@
 import axios, { AxiosResponse } from 'axios';
-import { Storage } from 'react-jhipster';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { serializeAxiosError } from './reducer.utils';
 
 import { AppThunk } from '../../config/store';
 import { AUTH_TOKEN_KEY } from '../../config/constants';
+import { Storage } from '../util';
 
 export const initialState = {
   loading: false,
@@ -41,7 +41,7 @@ interface IAuthParams {
 export const authenticate = createAsyncThunk(
   'authentication/login',
   async (auth: IAuthParams) => axios.post<any>('api/authenticate', auth),
-  { serializeError: serializeAxiosError }
+  { serializeError: serializeAxiosError },
 );
 
 export const login: (email: string, password: string, rememberMe?: boolean) => AppThunk = (email, password, rememberMe = false) => {

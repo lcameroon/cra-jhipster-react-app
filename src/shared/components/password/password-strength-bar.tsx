@@ -35,7 +35,7 @@ export const PasswordStrengthBar: React.FC<IPasswordStrengthBarProps> = ({ passw
     return force;
   };
 
-  const getColor = (s: number): any => {
+  const getIonColor = (s: number): any => {
     let idx = 0;
     if (s > 10) {
       if (s <= 20) {
@@ -54,12 +54,12 @@ export const PasswordStrengthBar: React.FC<IPasswordStrengthBarProps> = ({ passw
   const getPoints = (force) => {
     const pts = [] as any[];
     for (let i = 0; i < 5; i++) {
-      pts.push(<li key={i} className="point" style={i < force.idx ? { backgroundColor: force.col } : { backgroundColor: '#DDD' }} />);
+      pts.push(<li key={i} className="point" style={i < force.idx ? { backgroundIonColor: force.col } : { backgroundIonColor: '#DDD' }} />);
     }
     return pts;
   };
 
-  const strength = getColor(measureStrength(password));
+  const strength = getIonColor(measureStrength(password));
   const points = getPoints(strength);
 
   return (

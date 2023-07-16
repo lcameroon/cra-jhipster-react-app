@@ -5,7 +5,6 @@ import ErrorBoundaryRoute from '../../../shared/error/error-boundary-route';
 import UserManagement from './user-management';
 import UserManagementDetail from './user-management-detail';
 import UserManagementUpdate from './user-management-update';
-import UserManagementDeleteDialog from './user-management-delete-dialog';
 
 const Routes = ({ match }) => (
   <>
@@ -15,7 +14,6 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute exact path={`${match.url}/:login`} component={UserManagementDetail} />
       <ErrorBoundaryRoute path={match.url} component={UserManagement} />
     </Switch>
-    <ErrorBoundaryRoute path={`${match.url}/:login/delete`} component={UserManagementDeleteDialog} />
   </>
 );
 
